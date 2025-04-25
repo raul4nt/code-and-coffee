@@ -1,0 +1,10 @@
+{
+  "produtos": [
+    { "id": 1, "nome": "Espresso", "descricao": "Café forte", "preco": 5.00, "categoria": "Café", "imagemUrl": "" },
+    { "id": 2, "nome": "Cappuccino", "descricao": "Com espuma de leite", "preco": 7.50, "categoria": "Café", "imagemUrl": "" }
+  ],
+  "usuarios": [
+    { "id": 1, "email": "admin@coffee.com", "senha": "1234", "role": "admin", "token": "" }
+  ],
+  "pedidos": []
+}
