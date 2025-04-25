@@ -1,10 +1,18 @@
 {
-  "produtos": [
-    { "id": 1, "nome": "Espresso", "descricao": "Café forte", "preco": 5.00, "categoria": "Café", "imagemUrl": "" },
-    { "id": 2, "nome": "Cappuccino", "descricao": "Com espuma de leite", "preco": 7.50, "categoria": "Café", "imagemUrl": "" }
+  "products": [
+    { "id": 1, "name": "Espresso", "description": "Strong coffee", "price": 5.00, "category": "Coffee", "imageUrl": "assets/images/products/espresso.png" },
+    { "id": 2, "name": "Cappuccino", "description": "With milk foam", "price": 7.50, "category": "Coffee", "imageUrl": "assets/images/products/cappuccino.png" },
+    { "id": 3, "name": "Latte", "description": "Smooth milk coffee", "price": 6.00, "category": "Coffee", "imageUrl": "assets/images/products/latte.png" },
+    { "id": 4, "name": "Americano", "description": "Diluted espresso", "price": 5.50, "category": "Coffee", "imageUrl": "assets/images/products/americano.png" },
+    { "id": 5, "name": "Mocha", "description": "Chocolate-flavored coffee", "price": 8.00, "category": "Coffee", "imageUrl": "assets/images/products/mocha.png" },
+    { "id": 6, "name": "Macchiato", "description": "Espresso with milk drop", "price": 6.50, "category": "Coffee", "imageUrl": "assets/images/products/macchiato.png" },
+    { "id": 7, "name": "Flat White", "description": "Velvety coffee", "price": 7.00, "category": "Coffee", "imageUrl": "assets/images/products/flatwhite.png" },
+    { "id": 8, "name": "Iced Coffee", "description": "Chilled coffee", "price": 6.50, "category": "Coffee", "imageUrl": "assets/images/products/icedcoffee.webp" },
+    { "id": 9, "name": "Cold Brew", "description": "Brewed cold over hours", "price": 7.20, "category": "Coffee", "imageUrl": "assets/images/products/coldbrew.webp" },
+    { "id": 10, "name": "Affogato", "description": "Espresso with ice cream", "price": 8.50, "category": "Dessert", "imageUrl": "assets/images/products/affogato.webp" }
   ],
-  "usuarios": [
-    { "id": 1, "email": "admin@coffee.com", "senha": "1234", "role": "admin", "token": "" }
+  "users": [
+    { "id": 1, "email": "admin@coffee.com", "password": "1234", "role": "admin", "token": "" }
   ],
-  "pedidos": []
+  "orders": []
 }

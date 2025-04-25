@@ -1,0 +1,33 @@
+<!-- <div class="carousel-container">
+  <button (click)="prev()" [disabled]="currentIndex === 0" class="arrow left">&lt;</button>
+
+  <div class="carousel-items">
+    <div class="product-card" *ngFor="let product of visibleProducts">
+      <img [src]="product.imageUrl" alt="{{ product.name }}" />
+      <h5>{{ product.name }}</h5>
+      <p>{{ product.description }}</p>
+      <strong>${{ product.price.toFixed(2) }}</strong>
+    </div>
+  </div>
+
+  <button (click)="next()" [disabled]="currentIndex >= products.length - visibleCount" class="arrow right">&gt;</button>
+</div> -->
+
+<swiper
+  [slidesPerView]="3"
+  [spaceBetween]="20"
+  [navigation]="true"
+  [pagination]="{ clickable: true }"
+  class="mySwiper"
+>
+  <ng-container *ngFor="let product of products">
+    <ng-template swiperSlide>
+      <div class="product-card">
+        <img [src]="product.imageUrl" alt="{{ product.name }}" />
+        <h5>{{ product.name }}</h5>
+        <p>{{ product.description }}</p>
+        <strong>${{ product.price.toFixed(2) }}</strong>
+      </div>
+    </ng-template>
+  </ng-container>
+</swiper>
