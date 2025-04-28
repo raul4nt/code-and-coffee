@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { SearchPipe } from '../pipes/search.pipe';
+import { SearchPipe } from '../../pipes/search.pipe';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product.model';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-search-results',
