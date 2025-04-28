@@ -1,59 +1,39 @@
-# CodeAndCoffee
+Conceito C (acessando APIs OU em memória (com Service)):
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
 
-## Development server
+Apresentação de forma clara (para o professor);
 
-To start a local development server, run:
+CRUDs completos (pelo menos um por aluno) na aplicação com utilização de tabela e formulário;
 
-```bash
-ng serve
-```
+Trabalhar com múltiplas telas fazendo uso de rotas;
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Uma funcionalidade de filtro ou busca que evidencie o uso de Pipes;
 
-## Code scaffolding
+Conceito B (acessando APIs OU arquitetura Serverless):
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+Realizar as tarefas para alcançar o conceito C;
+Realizar uma funcionalidade de negócio (ou CRUD) que manipule duas entidades simultaneamente na aplicação como um todo - por aluno - em caso de dupla, terá que ter duas;
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Utilização dos conceitos do Angular de maneira adequada (componentes, diretivas, rotas, etc);
 
-```bash
-ng generate --help
-```
 
-## Building
+Interface Web adequada e responsiva (sugere-se utilizar Bootstrap ou frameworks semelhantes);
 
-To build the project run:
+Conceito A (acessando APIs OU arquitetura Serverless):
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Aplicação completa, realizando todas as funcionalidades do conceito B com regras de negócio aplicadas corretamente;
 
-## Running unit tests
+Validações de campos e na submissão dos dados via formulário [em todos, trabalho bem caprichado];
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Utilização de Login, guardando o Token em LocalStorage (ou outro) e protegendo as rotas utilizando RouteGuard;
 
-```bash
-ng test
-```
+Deploy da Aplicação.
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
+Realizados ✅:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Entrega no prazo e apresentação no dia (exceto se tiver atestado no dia)
+Utilização de um sistema de controle de versão (ex: git) e de um ambiente de colaboração e gerenciamento de código baseado nesse controle de versão (ex: github, bitbucket). Caso o trabalho seja em dupla, a colaboração deve estar evidenciada;

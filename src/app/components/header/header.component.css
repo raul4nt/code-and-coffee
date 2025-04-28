@@ -1,4 +1,26 @@
-.navbar {
+/* .navbar {
+  background-color: #392620;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0 15px;
+  display: inline-block;
+  text-align: center;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+ */
+ .navbar {
   background-color: #392620;
   height: 80px;
   display: flex;
@@ -20,3 +42,21 @@
   text-decoration: underline;
 }
 
+.search-bar {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: flex;
+  background: #ffffff;
+  padding: 5px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.search-bar .form-control {
+  width: 200px;
+}
+
+.search-bar .btn {
+  height: auto;
+}
