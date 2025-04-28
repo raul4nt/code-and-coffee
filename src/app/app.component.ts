@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { ProductCarouselComponent } from "./components/product-carousel/product-carousel.component";
+import { RouterOutlet } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, HeaderComponent, FooterComponent, ProductCarouselComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, ProductCarouselComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

@@ -23,7 +23,24 @@ import { Product } from '../models/product.model';
   `,
   styles: [`
     .product-list { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .product-card { width: 200px; padding: .5rem; background: #fff; color: #000; }
+    .product-card {
+      width: 200px;
+      padding: .5rem;
+      background: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      border-radius: 8px;
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      max-height: 150px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
   `]
 })
 export class SearchResultsComponent implements OnInit {
@@ -39,8 +56,8 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.searchTerm = params.get('q') || '';
     });
-    this.http.get<{ products: Product[] }>('/assets/db.json').subscribe(data => {
-      this.products = data.products;
+    this.http.get<Product[]>('http://localhost:3000/products').subscribe(data => {
+      this.products = data;
     });
   }
 }
