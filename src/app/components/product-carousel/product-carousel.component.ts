@@ -26,11 +26,15 @@ export class ProductCarouselComponent implements OnInit, AfterViewInit {
     new Swiper(this.swiperContainer.nativeElement, {
       slidesPerView: 3,
       spaceBetween: 20,
-      loop: false,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
-      },
+      }
     });
   }
 }

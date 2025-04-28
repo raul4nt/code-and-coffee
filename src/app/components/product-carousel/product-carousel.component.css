@@ -9,7 +9,7 @@
 }
 
 .product-card {
-  background-color: #fff; 
+  background-color: #fff;
   color: #000;
   padding: 1rem;
   border: 2px solid #000;
@@ -51,4 +51,13 @@
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
   background-color: #333;
+}
+
+.carousel-title {
+  font-family: 'Lora', serif;
+  font-size: 1.75rem;
+  color: #392620;
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
 }
