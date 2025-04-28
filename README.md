@@ -5,9 +5,6 @@ Apresentação de forma clara (para o professor);
 
 CRUDs completos (pelo menos um por aluno) na aplicação com utilização de tabela e formulário;
 
-Trabalhar com múltiplas telas fazendo uso de rotas;
-
-Uma funcionalidade de filtro ou busca que evidencie o uso de Pipes;
 
 Conceito B (acessando APIs OU arquitetura Serverless):
 
@@ -36,4 +33,9 @@ Deploy da Aplicação.
 Realizados ✅:
 
 Entrega no prazo e apresentação no dia (exceto se tiver atestado no dia)
+
 Utilização de um sistema de controle de versão (ex: git) e de um ambiente de colaboração e gerenciamento de código baseado nesse controle de versão (ex: github, bitbucket). Caso o trabalho seja em dupla, a colaboração deve estar evidenciada;
+
+Uma funcionalidade de filtro ou busca que evidencie o uso de Pipes;
+
+Trabalhar com múltiplas telas fazendo uso de rotas;
