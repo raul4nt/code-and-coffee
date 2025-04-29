@@ -1,28 +1,34 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent {
-  email: string = ''
-  password: string = ''
-  errorMessage: string = ''
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
 
-
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   onLogin() {
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        this.router.navigate(['/'])
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        // se tiver uma returnUrl(checar auth guard), redirecionara pra la ao logar,
+        // se nao, vai pra pagina principal mesmo.
+        this.router.navigateByUrl(returnUrl);
       },
       error: (err) => {
         console.error('Erro ao fazer login', err);

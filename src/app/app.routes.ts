@@ -8,3 +8,8 @@ export const routes: Routes = [
   { path: 'search', component: SearchResultsComponent },
   { path: 'login', component: LoginComponent }
 ];
+
+
+// const routes: Routes = [
+//   { path: 'store', component: StoreComponent, canActivate: [authGuard] },
+// ];
