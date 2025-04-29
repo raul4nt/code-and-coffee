@@ -1,0 +1,18 @@
+<div *ngIf="orders.length > 0; else noOrders">
+  <div *ngFor="let order of orders">
+    <div class="order-card">
+      <h5>Pedido ID: {{ order.id }}</h5>
+      <p>Status: {{ order.status }}</p>
+      <p>Total: {{ order.total | currency }}</p>
+      <p>Data: {{ order.createdAt }}</p>
+
+      <button (click)="confirmDelivery(order)" *ngIf="order.status === 'Pendente'">Confirmar Entrega</button>
+      <button (click)="cancelOrder(order)" *ngIf="order.status !== 'Entregue'">Cancelar Pedido</button>
+      <button (click)="deleteOrder(order.id)">Excluir Pedido</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #noOrders>
+  <p>Não há pedidos para exibir.</p>
+</ng-template>

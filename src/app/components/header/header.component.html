@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
-
     <div class="d-flex align-items-center">
       <a class="nav-link text-white me-3" routerLink="/store">Loja</a>
       <a class="nav-link text-white me-3" routerLink="/courses">Cursos</a>
       <a class="nav-link text-white" routerLink="/learn">Aprender</a>
+      <a class="nav-link text-white" routerLink="/about">Sobre Nós</a>
     </div>
 
     <div class="navbar-brand mx-auto">
@@ -12,11 +12,18 @@
     </div>
 
     <div class="d-flex align-items-center position-relative">
-      <a class="nav-link text-white me-3" routerLink="/about">Sobre Nós</a>
       <i class="bi bi-search text-white me-3" (click)="toggleSearchBar()"></i>
-      <a class="nav-link text-white" routerLink="/login">
-        <i class="bi bi-person"></i>
-      </a>
+      <a class="nav-link text-white" routerLink="/my-orders" *ngIf="isLoggedIn()">Meus Pedidos</a>
+
+      <div *ngIf="isLoggedIn()">
+        <a class="nav-link text-white me-3" (click)="logout()">Sair</a>
+      </div>
+
+      <div *ngIf="!isLoggedIn()">
+        <a class="nav-link text-white" routerLink="/login">
+          <i class="bi bi-person"></i>
+        </a>
+      </div>
 
       <div *ngIf="searchVisible" class="search-bar">
         <input
@@ -29,6 +36,5 @@
         <button class="btn btn-primary ms-2" (click)="onSearch()">Ok</button>
       </div>
     </div>
-
   </div>
 </nav>
