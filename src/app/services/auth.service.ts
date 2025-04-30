@@ -8,7 +8,7 @@ import { tap } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:3000'
+  private apiUrl = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class AuthService {
       .pipe(
         tap(users => {
           if (users.length > 0) {
-            const token = 'fake-jwt-token'; 
+            const token = 'fake-jwt-token';
             localStorage.setItem('authToken', token);
             localStorage.setItem('user', JSON.stringify(users[0]));
           } else {
@@ -40,5 +40,11 @@ export class AuthService {
   getUser(): any {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
+  }
+
+  
+  getUserId(): number | null {
+    const user = this.getUser();
+    return user ? user.id : null;
   }
 }

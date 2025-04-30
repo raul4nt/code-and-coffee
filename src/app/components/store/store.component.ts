@@ -1,34 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { OrderService } from '../../services/order.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-store',
-  standalone: true,
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css'],
   imports: [CommonModule]
 })
 export class StoreComponent implements OnInit {
   products: any[] = [];
-  addedMessage: string = '';
-  timeout: any;
+  userId: number | null = null;
 
-  constructor(private productsService: ProductService, private router: Router) {}
+  constructor(
+    private productService: ProductService,
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.productsService.getProducts().subscribe((data) => {
-      this.products = data;
+    this.productService.getProducts().subscribe((data) => {
+      this.products = data.map(product => ({ ...product, added: false }));
     });
+
+    this.userId = this.authService.getUserId();
   }
 
   addToCart(product: any) {
-    this.addedMessage = 'Adicionado';
-    clearTimeout(this.timeout);
+    if (!this.userId) {
+      alert('Você precisa estar logado para adicionar ao pedido.');
+      return;
+    }
 
-    this.timeout = setTimeout(() => {
-      this.addedMessage = '';
+    product.added = true;
+
+    setTimeout(() => {
+      product.added = false;
     }, 2000);
+
+    this.orderService.addProductToOrder(this.userId, product).subscribe({
+      next: (order) => {
+        console.log('Produto adicionado ao pedido:', order);
+      },
+      error: (err) => {
+        console.error('Erro ao adicionar ao pedido', err);
+      }
+    });
   }
 }
