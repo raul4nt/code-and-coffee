@@ -1,7 +1,6 @@
 <div class="login-container">
   <h2>Entrar</h2>
 
-  <!-- Mensagem de erro -->
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
@@ -33,4 +32,12 @@
 
     <button type="submit" class="btn btn-primary w-100">Entrar</button>
   </form>
+
+  <!-- Link para cadastro -->
+  <div class="text-center mt-3">
+    <span>É novo aqui?</span>
+    <button class="btn btn-link p-0 ms-1" (click)="navigateToRegister()">
+      Clique aqui para se cadastrar
+    </button>
+  </div>
 </div>

@@ -32,3 +32,6 @@ Interface Web adequada e responsiva (sugere-se utilizar Bootstrap ou frameworks 
 Regras de negócio aplicadas corretamente;
 
 Validações de campos e na submissão dos dados via formulário [em todos, trabalho bem caprichado];
+
+
+

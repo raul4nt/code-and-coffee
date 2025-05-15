@@ -5,13 +5,15 @@ import { LoginComponent } from './pages/login/login.component';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { authGuard } from './guards/auth.guard';
 import { StoreComponent } from './components/store/store.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchResultsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [authGuard] },
-  { path: 'store', component: StoreComponent }
+  { path: 'store', component: StoreComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 

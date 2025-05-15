@@ -8,7 +8,7 @@
 
       <button (click)="confirmDelivery(order)" *ngIf="order.status === 'Pendente'">Confirmar Entrega</button>
       <button (click)="cancelOrder(order)" *ngIf="order.status !== 'Entregue'">Cancelar Pedido</button>
-      <button (click)="deleteOrder(order.id)">Excluir Pedido</button>
+
     </div>
   </div>
 </div>

@@ -28,6 +28,17 @@ export class AuthService {
       );
   }
 
+  register(email: string, password: string): Observable<any> {
+    const newUser = {
+      email,
+      password,
+      role: 'customer',
+      token: ''
+    }
+
+    return this.http.post<any>(`${this.apiUrl}/users`, newUser);
+  }
+
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
@@ -42,7 +53,7 @@ export class AuthService {
     return user ? JSON.parse(user) : null;
   }
 
-  
+
   getUserId(): number | null {
     const user = this.getUser();
     return user ? user.id : null;
