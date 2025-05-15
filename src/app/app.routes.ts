@@ -6,14 +6,15 @@ import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
 import { authGuard } from './guards/auth.guard';
 import { StoreComponent } from './components/store/store.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { guestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'search', component: SearchResultsComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [authGuard] },
   { path: 'store', component: StoreComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
 ];
 
 
