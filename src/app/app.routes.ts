@@ -17,7 +17,3 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
 ];
 
-
-// const routes: Routes = [
-//   { path: 'store', component: StoreComponent, canActivate: [authGuard] },
-// ];
