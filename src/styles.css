@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+body {
+  font-family: 'Sodo Sans', sans-serif;
+}
+
+
+
+/* You can add global styles to this file, and also import other style files
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import 'swiper/css';
@@ -8,4 +20,4 @@
 
 body {
   font-family: 'Lora', sans-serif;
-}
+} */

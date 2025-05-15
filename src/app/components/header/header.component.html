@@ -1,9 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
   <div class="container-fluid">
     <div class="d-flex align-items-center">
-      <a class="nav-link text-white me-3" routerLink="/store">LOJA</a>
-      <a class="nav-link text-white me-3" routerLink="/courses">CURSOS</a>
-      <a class="nav-link text-white" routerLink="/learn">APRENDER</a>
+      <a class="nav-link text-white me-3" routerLink="/store">MENU</a>
+      <a class="nav-link text-white me-3" routerLink="/courses">NOSSO CAFÉ</a>
       <a class="nav-link text-white" routerLink="/about">SOBRE NÓS</a>
     </div>
 
@@ -13,10 +12,12 @@
 
     <div class="d-flex align-items-center position-relative">
       <i class="bi bi-search text-white me-3" (click)="toggleSearchBar()"></i>
-      <a class="nav-link text-white" routerLink="/my-orders" *ngIf="isLoggedIn()">Meus Pedidos</a>
+      <a class="nav-link text-white" routerLink="/my-orders" *ngIf="isLoggedIn()">PEDIDOS</a>
 
       <div *ngIf="isLoggedIn()">
-        <a class="nav-link text-white me-3" (click)="logout()">Sair</a>
+        <a class="nav-link text-white me-3" (click)="logout()" style="cursor: pointer;">
+          <i class="bi bi-box-arrow-right"></i>
+        </a>
       </div>
 
       <div *ngIf="!isLoggedIn()">
