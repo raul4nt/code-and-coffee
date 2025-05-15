@@ -183,6 +183,33 @@
       ],
       "total": 23.5,
       "createdAt": "2025-05-15T19:06:50.006Z"
+    },
+    {
+      "id": "1467",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        },
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        }
+      ],
+      "total": 10,
+      "createdAt": "2025-05-15T19:19:39.020Z"
     }
   ]
 }
