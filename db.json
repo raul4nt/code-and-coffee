@@ -1,86 +1,86 @@
 {
-  "products": [
-    {
-      "id": "1",
-      "name": "Espresso",
-      "description": "Café forte",
-      "price": 5,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/espresso.png"
-    },
-    {
-      "id": "2",
-      "name": "Cappuccino",
-      "description": "Com espuma de leite",
-      "price": 7.5,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/cappuccino.png"
-    },
-    {
-      "id": "3",
-      "name": "Latte",
-      "description": "Café suave com leite",
-      "price": 6,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/latte.png"
-    },
-    {
-      "id": "4",
-      "name": "Americano",
-      "description": "Café expresso diluído",
-      "price": 5.5,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/americano.png"
-    },
-    {
-      "id": "5",
-      "name": "Mocha",
-      "description": "Café com sabor de chocolate",
-      "price": 8,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/mocha.png"
-    },
-    {
-      "id": "6",
-      "name": "Macchiato",
-      "description": "Café expresso com gota de leite",
-      "price": 6.5,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/macchiato.png"
-    },
-    {
-      "id": "7",
-      "name": "Flat White",
-      "description": "Café aveludado",
-      "price": 7,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/flatwhite.png"
-    },
-    {
-      "id": "8",
-      "name": "Iced Coffee",
-      "description": "Café gelado",
-      "price": 6.5,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/icedcoffee.webp"
-    },
-    {
-      "id": "9",
-      "name": "Cold Brew",
-      "description": "Café preparado a frio por horas",
-      "price": 7.2,
-      "category": "Coffee",
-      "imageUrl": "assets/images/products/coldbrew.webp"
-    },
-    {
-      "id": "10",
-      "name": "Affogato",
-      "description": "Café expresso com sorvete",
-      "price": 8.5,
-      "category": "Dessert",
-      "imageUrl": "assets/images/products/affogato.webp"
-    }
-  ],
+"products": [
+  {
+    "id": "1",
+    "name": "Espresso",
+    "description": "Café forte",
+    "price": 8.00,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/espresso.png"
+  },
+  {
+    "id": "2",
+    "name": "Cappuccino",
+    "description": "Com espuma de leite",
+    "price": 12.50,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/cappuccino.png"
+  },
+  {
+    "id": "3",
+    "name": "Latte",
+    "description": "Café suave com leite",
+    "price": 11.00,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/latte.png"
+  },
+  {
+    "id": "4",
+    "name": "Americano",
+    "description": "Café expresso diluído",
+    "price": 9.00,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/americano.png"
+  },
+  {
+    "id": "5",
+    "name": "Mocha",
+    "description": "Café com sabor de chocolate",
+    "price": 14.90,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/mocha.png"
+  },
+  {
+    "id": "6",
+    "name": "Macchiato",
+    "description": "Café expresso com gota de leite",
+    "price": 10.50,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/macchiato.png"
+  },
+  {
+    "id": "7",
+    "name": "Flat White",
+    "description": "Café aveludado",
+    "price": 12.00,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/flatwhite.png"
+  },
+  {
+    "id": "8",
+    "name": "Iced Coffee",
+    "description": "Café gelado",
+    "price": 10.90,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/icedcoffee.webp"
+  },
+  {
+    "id": "9",
+    "name": "Cold Brew",
+    "description": "Café preparado a frio por horas",
+    "price": 13.50,
+    "category": "Coffee",
+    "imageUrl": "assets/images/products/coldbrew.webp"
+  },
+  {
+    "id": "10",
+    "name": "Affogato",
+    "description": "Café expresso com sorvete",
+    "price": 15.90,
+    "category": "Dessert",
+    "imageUrl": "assets/images/products/affogato.webp"
+  }
+],
   "users": [
     {
       "id": "1",
