@@ -64,3 +64,8 @@
 .logo-link {
   margin-right: 10px;
 }
+
+.active-nav-link {
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+}

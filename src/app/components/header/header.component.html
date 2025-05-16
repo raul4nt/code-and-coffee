@@ -4,9 +4,33 @@
       <a routerLink="/" class="me-3 logo-link">
         <img src="assets/new-logo.png" alt="Code and Coffee Logo" style="height: 40px;" />
       </a>
-      <a class="nav-link text-black me-3" routerLink="/store">MENU</a>
-      <a class="nav-link text-black me-3" routerLink="/our-coffee">NOSSO CAFÉ</a>
-      <a class="nav-link text-black" routerLink="/about">SOBRE NÓS</a>
+      <a
+        class="nav-link text-black me-3"
+        routerLink="/store"
+        routerLinkActive="active-nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        MENU
+      </a>
+
+      <a
+        class="nav-link text-black me-3"
+        routerLink="/our-coffee"
+        routerLinkActive="active-nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        NOSSO CAFÉ
+      </a>
+
+      <a
+        class="nav-link text-black"
+        routerLink="/about-us"
+        routerLinkActive="active-nav-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        SOBRE NÓS
+      </a>
+
     </div>
 
     <div class="d-flex align-items-center position-relative">

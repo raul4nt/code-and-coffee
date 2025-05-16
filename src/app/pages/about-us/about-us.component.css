@@ -1,0 +1,38 @@
+.about-us-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  color: #392620;
+}
+
+.about-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px;
+  padding-bottom: 0.5rem;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+
+.about-text {
+  text-align: justify;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.about-highlight {
+  margin-top: 1rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #392620;
+  text-align: center;
+}
