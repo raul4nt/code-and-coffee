@@ -31,12 +31,18 @@
 }
 
 .navbar i {
-  font-weight: 300;
   font-weight: bold;
   cursor: pointer;
   color: black;
   font-family: 'Lato', sans-serif;
+  transition: color 0.3s ease;
 }
+
+.navbar i.bi-search:hover,
+.navbar i.bi-box-arrow-right:hover {
+  color: #c9b037 !important;
+}
+
 
 .navbar a:hover {
   color: #c9b037 !important;
@@ -79,3 +85,4 @@
   border-bottom: 2px solid #000;
   font-weight: 600;
 }
+
