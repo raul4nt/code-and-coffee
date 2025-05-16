@@ -39,8 +39,18 @@
 }
 
 .navbar a:hover {
-  text-decoration: underline;
+  color: #c9b037 !important;
+  text-decoration: none;
 }
+
+.navbar a.active-nav-link,
+.navbar a.active-nav-link:hover {
+  color: black !important;
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+  text-decoration: none;
+}
+
 
 .search-bar {
   position: absolute;
