@@ -1,4 +1,54 @@
-<div class="login-container">
+<div class="login-wrapper">
+  <h2 class="login-title">Bem-vindo. ☕️</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="login-box">
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          required
+          [(ngModel)]="email"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          required
+          [(ngModel)]="password"
+        />
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-dark">Entrar</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="text-center mt-3">
+    <span>É novo aqui?</span>
+  <button class="btn btn-link text-black p-0 ms-1" (click)="navigateToRegister()">
+    Clique aqui para se cadastrar
+  </button>
+
+  </div>
+</div>
+
+
+
+<!-- <div class="login-container">
   <h2>Entrar</h2>
 
   <div *ngIf="errorMessage" class="alert alert-danger">
@@ -33,11 +83,10 @@
     <button type="submit" class="btn btn-primary w-100">Entrar</button>
   </form>
 
-  <!-- Link para cadastro -->
   <div class="text-center mt-3">
     <span>É novo aqui?</span>
     <button class="btn btn-link p-0 ms-1" (click)="navigateToRegister()">
       Clique aqui para se cadastrar
     </button>
   </div>
-</div>
+</div> -->

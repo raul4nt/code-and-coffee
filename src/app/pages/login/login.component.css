@@ -1,0 +1,77 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  font-size: 18px;
+}
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.login-title {
+  font-weight: bold;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  margin-top: 60px;
+}
+
+.login-box {
+  background-color: white;
+  padding: 50px 40px;
+  border-radius: 16px;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0.5), rgba(0,0,0,0.1));
+  border-image-slice: 1;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-box label.form-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.login-box input.form-control {
+  height: 48px;
+  font-size: 1.1rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.btn-dark {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  min-width: 120px;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+.btn-link.text-black {
+  color: #000 !important;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.text-center span {
+  font-size: 1rem;
+}
+
+.text-center button.btn-link {
+  font-size: 1rem;
+}
