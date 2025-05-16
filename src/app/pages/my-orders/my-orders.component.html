@@ -1,3 +1,4 @@
+<h2 class="orders-title">Meus últimos pedidos</h2>
 <div *ngIf="orders.length > 0; else noOrders" class="orders-container">
   <div *ngFor="let order of orders"
        [ngClass]="{
@@ -9,7 +10,13 @@
        }">
 
     <h5>Pedido ID: {{ order.id }}</h5>
-    <p>Status: {{ order.status }}</p>
+    <p>Status:
+      <span [ngClass]="{
+        'status-delivered': order.status === 'Entregue',
+        'status-canceled': order.status === 'Cancelado',
+        'status-pending': order.status === 'Pendente'
+      }">{{ order.status }}</span>
+    </p>
     <p>Total: {{ order.total | currency }}</p>
     <p>Data: {{ order.createdAt | date: 'short' }}</p>
 
