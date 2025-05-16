@@ -1,3 +1,4 @@
+<h2 class="store-title">Produtos disponíveis</h2>
 <div class="container my-4">
   <div class="row">
     <div class="col-md-4" *ngFor="let product of products">
@@ -8,7 +9,7 @@
           <p class="card-text">{{product.description}}</p>
           <p class="card-text"><strong>R$ {{product.price | number: '1.2-2'}}</strong></p>
           <button class="btn btn-dark w-100" (click)="addToCart(product)">Adicionar ao Pedido</button>
-          <p *ngIf="product.added" class="text-success mt-2">Adicionado</p>
+          <p *ngIf="product.added" class="text-success mt-2">Produto adicionado</p>
         </div>
       </div>
     </div>

@@ -250,7 +250,7 @@
     {
       "id": "f168",
       "userId": "1",
-      "status": "Pendente",
+      "status": "Cancelado",
       "products": [
         {
           "id": "1",
@@ -278,10 +278,64 @@
           "category": "Coffee",
           "imageUrl": "assets/images/products/latte.png",
           "added": true
+        },
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        },
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        },
+        {
+          "id": "10",
+          "name": "Affogato",
+          "description": "Café expresso com sorvete",
+          "price": 15.9,
+          "category": "Dessert",
+          "imageUrl": "assets/images/products/affogato.webp",
+          "added": true
         }
       ],
-      "total": 33.9,
+      "total": 72.7,
       "createdAt": "2025-05-16T18:51:35.686Z"
+    },
+    {
+      "id": "16a7",
+      "userId": "1",
+      "status": "Pendente",
+      "products": [
+        {
+          "id": "4",
+          "name": "Americano",
+          "description": "Café expresso diluído",
+          "price": 9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/americano.png",
+          "added": true
+        },
+        {
+          "id": "9",
+          "name": "Cold Brew",
+          "description": "Café preparado a frio por horas",
+          "price": 13.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/coldbrew.webp",
+          "added": true
+        }
+      ],
+      "total": 22.5,
+      "createdAt": "2025-05-16T19:58:29.433Z"
     }
   ]
 }
