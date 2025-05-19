@@ -17,6 +17,7 @@ Swiper.use([Autoplay, Navigation]);
 export class ProductCarouselComponent implements OnInit, AfterViewInit {
   products: Product[] = [];
   @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
+  swiperInstance!: Swiper;
 
   constructor(private http: HttpClient) {}
 
@@ -26,7 +27,7 @@ export class ProductCarouselComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    new Swiper(this.swiperContainer.nativeElement, {
+    this.swiperInstance = new Swiper(this.swiperContainer.nativeElement, {
       slidesPerView: 3,
       spaceBetween: 20,
       loop: true,

@@ -1,5 +1,7 @@
 <h2 class="carousel-title">Descubra o verdadeiro sabor do café especial.</h2>
-<div class="swiper" #swiperContainer>
+<div class="swiper" #swiperContainer
+     (mouseenter)="swiperInstance.autoplay.stop()"
+     (mouseleave)="swiperInstance.autoplay.start()">
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let product of products">
       <div class="product-card">

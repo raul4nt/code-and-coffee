@@ -8,7 +8,6 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID } from '@angular/core';
 
-// Registra o locale pt-BR
 registerLocaleData(localePt);
 
 bootstrapApplication(AppComponent, {
