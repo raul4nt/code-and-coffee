@@ -2,13 +2,12 @@ TODO:
 
 criar página de edição de usuario(usuario editar seu nome ou email, talvez senha, e excluir sua conta)
 
-criar página "Nosso café"(ou, remover ela/trocar pra outro nome e ideia)
-
+checar campo token do user model 
 
 
 CRUDs completos (pelo menos um por aluno) na aplicação com utilização de tabela e formulário;
 
-Realizar uma funcionalidade de negócio (ou CRUD) que manipule duas entidades simultaneamente na aplicação como um todo 
+
 
 
 Realizados ✅:
@@ -21,6 +20,8 @@ Trabalhar com múltiplas telas fazendo uso de rotas;
 
 Utilização de Login, guardando o Token em LocalStorage (ou outro) e protegendo as rotas utilizando RouteGuard;
 
+Realizar uma funcionalidade de negócio (ou CRUD) que manipule duas entidades simultaneamente na aplicação como um todo 
+
 
 
 
@@ -28,10 +29,6 @@ Utilização de Login, guardando o Token em LocalStorage (ou outro) e protegendo
 Finais:
 
 Deploy da Aplicação.
-
-Apresentação de forma clara (para o professor);
-
-Entrega no prazo e apresentação no dia (exceto se tiver atestado no dia)
 
 Utilização dos conceitos do Angular de maneira adequada (componentes, diretivas, rotas, etc);
 

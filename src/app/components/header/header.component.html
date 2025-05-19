@@ -24,7 +24,6 @@
       <a class="nav-link text-black me-3" routerLink="/my-orders" routerLinkActive="active-nav-link" [routerLinkActiveOptions]="{ exact: true }">PEDIDOS</a>
     </div>
 
-
       <div *ngIf="isLoggedIn()">
         <a class="nav-link text-black me-3" (click)="logout()" style="cursor: pointer;">
           <i class="bi bi-box-arrow-right"></i>
@@ -39,3 +38,4 @@
     </div>
   </div>
 </nav>
+

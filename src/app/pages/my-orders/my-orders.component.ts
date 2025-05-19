@@ -80,19 +80,26 @@ export class MyOrdersComponent implements OnInit {
     });
   }
 
-  get inProcessOrders() {
-  return this.orders.filter(o =>
-    o.status === 'Aguardando confirmação' || o.status === 'Em preparação'
-  );
+get inProcessOrders() {
+  return this.orders
+    .filter(o =>
+      o.status === 'Aguardando confirmação' || o.status === 'Em preparação'
+    )
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 }
 
-  get deliveredOrders() {
-    return this.orders.filter(o => o.status === 'Entregue');
-  }
+get deliveredOrders() {
+  return this.orders
+    .filter(o => o.status === 'Entregue')
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
 
-  get canceledOrders() {
-    return this.orders.filter(o => o.status === 'Cancelado');
-  }
+get canceledOrders() {
+  return this.orders
+    .filter(o => o.status === 'Cancelado')
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+}
+
 
 
 }

@@ -16,7 +16,7 @@
         }">{{ order.status }}</span>
       </p>
       <p>Total: {{ order.total | currency:'BRL':'symbol':'1.2-2' }}</p>
-      <p>Data: {{ order.createdAt | date: 'short' }}</p>
+      <p>Data: {{ order.createdAt | date: 'dd/MM/yyyy, HH:mm' }}h</p>
 
       <p>Itens por unidade:</p>
       <ul>

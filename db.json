@@ -261,6 +261,33 @@
       ],
       "total": 28.4,
       "createdAt": "2025-05-19T18:40:48.428Z"
+    },
+    {
+      "id": "9b08",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "3",
+          "name": "Latte",
+          "description": "Café suave com leite",
+          "price": 11,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/latte.png",
+          "added": true
+        },
+        {
+          "id": "10",
+          "name": "Affogato",
+          "description": "Café expresso com sorvete",
+          "price": 15.9,
+          "category": "Dessert",
+          "imageUrl": "assets/images/products/affogato.webp",
+          "added": true
+        }
+      ],
+      "total": 26.9,
+      "createdAt": "2025-05-19T19:31:36.823Z"
     }
   ]
 }
