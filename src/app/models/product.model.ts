@@ -5,4 +5,5 @@ export interface Product {
   price: number;
   category: 'Coffee' | 'Snack' | 'Dessert';
   imageUrl?: string;
+  added?: boolean;
 }

@@ -372,6 +372,60 @@
       ],
       "total": 34.9,
       "createdAt": "2025-05-19T13:33:08.219Z"
+    },
+    {
+      "id": "2d67",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        }
+      ],
+      "total": 8,
+      "createdAt": "2025-05-19T13:49:39.865Z"
+    },
+    {
+      "id": "c302",
+      "userId": "1",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        },
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        },
+        {
+          "id": "3",
+          "name": "Latte",
+          "description": "Café suave com leite",
+          "price": 11,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/latte.png",
+          "added": true
+        }
+      ],
+      "total": 27,
+      "createdAt": "2025-05-19T13:52:33.311Z"
     }
   ]
 }

@@ -4,6 +4,7 @@ import { OrderService } from '../../services/order.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-store',
@@ -12,14 +13,13 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class StoreComponent implements OnInit {
-  products: any[] = [];
+  products: Product[] = [];
   userId: number | null = null;
 
   constructor(
     private productService: ProductService,
     private orderService: OrderService,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit() {
