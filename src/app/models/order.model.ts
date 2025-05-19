@@ -4,7 +4,7 @@ export interface Order {
   id?: number;
   userId: number;
   products: Product[]
-  status: 'Pendente' | 'Concluído' | 'Cancelado' | 'Entregue'
+  status: 'Em preparação' | 'Concluído' | 'Cancelado' | 'Entregue' | 'Aguardando confirmação'
   total: number
   createdAt: string
 }

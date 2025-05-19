@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
   template: `
   <h2 class="search-title">Resultados para: "{{ searchTerm }}"</h2>
   <div *ngIf="(products | searchFilter:searchTerm).length === 0" class="product-not-found">
-    Nenhum produto encontrado :(
+    Nenhum produto encontrado.
   </div>
   <div class="container my-4">
     <div class="row">

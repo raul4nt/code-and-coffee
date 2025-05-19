@@ -8,10 +8,24 @@
 }
 
 .about-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  border-bottom: 2px;
   padding-bottom: 0.5rem;
+}
+
+.about-text {
+  text-align: justify;
+  margin: 0 auto 2rem;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.about-highlight {
+  margin-top: 1.5rem;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #392620;
+  text-align: center;
 }
 
 .about-image {
@@ -21,18 +35,13 @@
   border-radius: 8px;
   margin: 0 auto 1.5rem;
   display: block;
+  filter: grayscale(100%);
+  transition: transform 0.3s ease, filter 0.3s ease 1.2s;
+  cursor: pointer;
 }
 
-.about-text {
-  text-align: justify;
-  margin: 0 auto;
-  max-width: 600px;
-}
-
-.about-highlight {
-  margin-top: 1rem;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #392620;
-  text-align: center;
+.about-image:hover {
+  transform: scale(1.03);
+  filter: grayscale(0%);
+  transition-delay: 0s;
 }

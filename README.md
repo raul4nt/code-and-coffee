@@ -2,13 +2,7 @@ TODO:
 
 criar página de edição de usuario(usuario editar seu nome ou email, talvez senha, e excluir sua conta)
 
-melhorar estilização(mesmo q de maneira básica) da página de pesquisa de produtos(talvez adicionando um "adicionar produto"), talvez mover a pesquisa pro MENU
-
-adicionar risquinho q mostra q estamos na pagina(active) de pedidos
-
-adicionar outro status de pedido, q seria o "aguardando pedido", pra ele ir pro status pendente
-
-adicionar filtro de pedidos com base em status(entregue, cancelado e pendente), e deixar em cima do "Meus ultimos pedidos" pedidos apenas de status Aguardando confirmação
+criar página "Nosso café"(ou, remover ela/trocar pra outro nome e ideia)
 
 
 

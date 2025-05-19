@@ -1,38 +1,76 @@
-<h2 class="orders-title">Meus últimos pedidos</h2>
-<div *ngIf="orders.length > 0; else noOrders" class="orders-container">
-  <div *ngFor="let order of orders"
-       [ngClass]="{
-         'order-card': true,
-         'success': order.status === 'Entregue',
-         'error': order.status === 'Cancelado',
-         'warning': order.status === 'Pendente',
-         'default': order.status !== 'Entregue' && order.status !== 'Cancelado' && order.status !== 'Pendente'
-       }">
+<ng-container *ngIf="inProcessOrders.length > 0">
+  <h2 class="orders-title">Pedidos em processo</h2>
+  <div class="orders-container">
+    <div *ngFor="let order of inProcessOrders"
+         [ngClass]="{
+           'order-card': true,
+           'warning': order.status === 'Em preparação',
+           'waiting': order.status === 'Aguardando confirmação'
+         }">
 
-    <h5>Pedido ID: {{ order.id }}</h5>
-    <p>Status:
-      <span [ngClass]="{
-        'status-delivered': order.status === 'Entregue',
-        'status-canceled': order.status === 'Cancelado',
-        'status-pending': order.status === 'Pendente'
-      }">{{ order.status }}</span>
-    </p>
-    <p>Total: {{ order.total | currency }}</p>
-    <p>Data: {{ order.createdAt | date: 'short' }}</p>
+      <h5>Pedido ID: {{ order.id }}</h5>
+      <p>Status:
+        <span [ngClass]="{
+          'status-pending': order.status === 'Em preparação',
+          'status-waiting': order.status === 'Aguardando confirmação'
+        }">{{ order.status }}</span>
+      </p>
+      <p>Total: {{ order.total | currency:'BRL':'symbol':'1.2-2' }}</p>
+      <p>Data: {{ order.createdAt | date: 'short' }}</p>
 
-    <p>Itens por unidade:</p>
-    <ul>
-      <li *ngFor="let product of order.products">
-        {{ product.name }}
-      </li>
-    </ul>
+      <p>Itens por unidade:</p>
+      <ul>
+        <li *ngFor="let product of order.products">
+          {{ product.name }}
+        </li>
+      </ul>
 
-    <button (click)="confirmDelivery(order)" *ngIf="order.status === 'Pendente'">Confirmar Entrega</button>
-    <button (click)="cancelOrder(order)" *ngIf="order.status !== 'Entregue' && order.status !== 'Cancelado'">Cancelar Pedido</button>
+      <button (click)="confirmOrder(order)" *ngIf="order.status === 'Aguardando confirmação'">Confirmar pedido</button>
+      <button (click)="confirmDelivery(order)" *ngIf="order.status === 'Em preparação'">Confirmar entrega</button>
+      <button (click)="cancelOrder(order)">Cancelar pedido</button>
 
+    </div>
   </div>
-</div>
+</ng-container>
 
-<ng-template #noOrders>
-  <p>Não há pedidos para exibir.</p>
-</ng-template>
+<ng-container *ngIf="deliveredOrders.length > 0">
+  <h2 class="orders-title">Pedidos entregues</h2>
+  <div class="orders-container">
+    <div *ngFor="let order of deliveredOrders" class="order-card success">
+      <h5>Pedido ID: {{ order.id }}</h5>
+      <p>Status:
+        <span class="status-delivered">{{ order.status }}</span>
+      </p>
+      <p>Total: {{ order.total | currency:'BRL':'symbol':'1.2-2' }}</p>
+      <p>Data: {{ order.createdAt | date: 'short' }}</p>
+
+      <p>Itens por unidade:</p>
+      <ul>
+        <li *ngFor="let product of order.products">
+          {{ product.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="canceledOrders.length > 0">
+  <h2 class="orders-title">Pedidos cancelados</h2>
+  <div class="orders-container">
+    <div *ngFor="let order of canceledOrders" class="order-card error">
+      <h5>Pedido ID: {{ order.id }}</h5>
+      <p>Status:
+        <span class="status-canceled">{{ order.status }}</span>
+      </p>
+      <p>Total: {{ order.total | currency:'BRL':'symbol':'1.2-2' }}</p>
+      <p>Data: {{ order.createdAt | date: 'short' }}</p>
+
+      <p>Itens por unidade:</p>
+      <ul>
+        <li *ngFor="let product of order.products">
+          {{ product.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</ng-container>

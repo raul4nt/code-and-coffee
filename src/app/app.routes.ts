@@ -8,6 +8,7 @@ import { StoreComponent } from './components/store/store.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { guestGuard } from './guards/guest.guard';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { OurCoffeeComponent } from './pages/our-coffee/our-coffee.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'my-orders', component: MyOrdersComponent, canActivate: [authGuard] },
   { path: 'store', component: StoreComponent },
   { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
-  { path: 'about-us', component: AboutUsComponent }
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'our-coffee', component: OurCoffeeComponent },
 ];
 

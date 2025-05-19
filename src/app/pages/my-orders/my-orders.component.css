@@ -4,7 +4,6 @@
   gap: 25px;
   justify-items: center;
   padding: 20px;
-  min-height: 80vh;
 }
 
 .orders-title {
@@ -13,7 +12,8 @@
 }
 
 .order-card {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
   margin: 0;
   border-radius: 6px;
@@ -40,6 +40,11 @@
 
 .status-canceled {
   color: #ef9a9a;
+  font-weight: bold;
+}
+
+.status-waiting {
+  color: #64b5f6;
   font-weight: bold;
 }
 

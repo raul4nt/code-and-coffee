@@ -29,11 +29,24 @@ export class MyOrdersComponent implements OnInit {
     });
   }
 
-  confirmDelivery(order: Order): void {
+  confirmOrder(order: Order): void {
+    order.status = 'Em preparação';
+    this.orderService.updateOrder(order).subscribe({
+      next: () => {
+        console.log('Pedido confirmado');
+        this.loadOrders();
+      },
+      error: (err) => {
+        console.error('Erro ao confirmar pedido', err);
+      }
+    });
+  }
+
+    confirmDelivery(order: Order): void {
     order.status = 'Entregue';
     this.orderService.updateOrder(order).subscribe({
       next: () => {
-        console.log('Entrega confirmada');
+        console.log('Pedido entregue');
         this.loadOrders();
       },
       error: (err) => {
@@ -66,4 +79,20 @@ export class MyOrdersComponent implements OnInit {
       }
     });
   }
+
+  get inProcessOrders() {
+  return this.orders.filter(o =>
+    o.status === 'Aguardando confirmação' || o.status === 'Em preparação'
+  );
+}
+
+  get deliveredOrders() {
+    return this.orders.filter(o => o.status === 'Entregue');
+  }
+
+  get canceledOrders() {
+    return this.orders.filter(o => o.status === 'Cancelado');
+  }
+
+
 }

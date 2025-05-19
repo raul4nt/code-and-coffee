@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -37,12 +37,12 @@ export class OrderService {
   addProductToOrder(userId: number, product: Product): Observable<Order> {
     return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`).pipe(
       switchMap((orders) => {
-        let order = orders.find((order) => order.status === 'Pendente');
+        let order = orders.find((order) => order.status === 'Aguardando confirmação');
         if (!order) {
 
           order = {
             userId,
-            status: 'Pendente',
+            status: 'Aguardando confirmação',
             products: [product],
             total: product.price,
             createdAt: new Date().toISOString(),
