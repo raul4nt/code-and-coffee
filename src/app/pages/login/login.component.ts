@@ -35,7 +35,7 @@ export class LoginComponent {
         this.errorMessage = 'Email ou senha inválidos.';
       }
     });
-  }
+  }     
 
   navigateToRegister(): void {
     this.router.navigate(['/register']);

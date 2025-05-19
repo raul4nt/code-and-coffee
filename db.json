@@ -313,7 +313,7 @@
     {
       "id": "16a7",
       "userId": "1",
-      "status": "Pendente",
+      "status": "Entregue",
       "products": [
         {
           "id": "4",
@@ -336,6 +336,42 @@
       ],
       "total": 22.5,
       "createdAt": "2025-05-16T19:58:29.433Z"
+    },
+    {
+      "id": "3bad",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "6",
+          "name": "Macchiato",
+          "description": "Café expresso com gota de leite",
+          "price": 10.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/macchiato.png",
+          "added": true
+        },
+        {
+          "id": "9",
+          "name": "Cold Brew",
+          "description": "Café preparado a frio por horas",
+          "price": 13.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/coldbrew.webp",
+          "added": true
+        },
+        {
+          "id": "8",
+          "name": "Iced Coffee",
+          "description": "Café gelado",
+          "price": 10.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/icedcoffee.webp",
+          "added": true
+        }
+      ],
+      "total": 34.9,
+      "createdAt": "2025-05-19T13:33:08.219Z"
     }
   ]
 }
