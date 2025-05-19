@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -12,12 +13,15 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  name: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
+  user: User = {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  };
+
+  errorMessage = '';
+  successMessage = '';
 
   constructor(private router: Router, private authService: AuthService) {}
 
@@ -25,36 +29,38 @@ export class RegisterComponent {
     this.errorMessage = '';
     this.successMessage = '';
 
-    if (!this.name.trim() || !this.email.trim() || !this.password || !this.confirmPassword) {
+    const { name, email, password, confirmPassword } = this.user;
+
+    if (!name.trim() || !email.trim() || !password || !confirmPassword) {
       this.errorMessage = 'Preencha todos os campos.';
       return;
     }
 
-    if (this.name.trim().split(' ').length < 2) {
+    if (name.trim().split(' ').length < 2) {
       this.errorMessage = 'Digite seu nome completo.';
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(this.email)) {
+    if (!emailRegex.test(email)) {
       this.errorMessage = 'Digite um email válido.';
       return;
     }
 
-    if (this.password.length < 6) {
+    if (password.length < 6) {
       this.errorMessage = 'A senha deve ter no mínimo 6 caracteres.';
       return;
     }
 
-    if (this.password !== this.confirmPassword) {
+    if (password !== confirmPassword) {
       this.errorMessage = 'As senhas não coincidem.';
       return;
     }
 
-    this.authService.register(this.email, this.password).subscribe({
+    this.authService.register(name, email, password).subscribe({
       next: () => {
         this.successMessage = 'Cadastro realizado com sucesso! Redirecionando pra página de login...';
-        setTimeout(() => this.router.navigate(['/login']), 5000);
+        setTimeout(() => this.router.navigate(['/login']), 3000);
       },
       error: (err) => {
         console.error('Erro ao registrar:', err);

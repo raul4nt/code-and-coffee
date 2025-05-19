@@ -25,9 +25,12 @@
         </li>
       </ul>
 
-      <button (click)="confirmOrder(order)" *ngIf="order.status === 'Aguardando confirmação'">Confirmar pedido</button>
-      <button (click)="confirmDelivery(order)" *ngIf="order.status === 'Em preparação'">Confirmar entrega</button>
-      <button (click)="cancelOrder(order)">Cancelar pedido</button>
+    <div class="d-flex flex-wrap gap-2 mt-3">
+      <button class="btn btn-dark" (click)="confirmOrder(order)" *ngIf="order.status === 'Aguardando confirmação'">Confirmar pedido</button>
+      <button class="btn btn-dark" (click)="confirmDelivery(order)" *ngIf="order.status === 'Em preparação'">Confirmar entrega</button>
+      <button class="btn btn-dark" (click)="cancelOrder(order)">Cancelar pedido</button>
+    </div>
+
 
     </div>
   </div>

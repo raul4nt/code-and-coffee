@@ -60,6 +60,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // se foi fora, seto ela como false
     }
   }
+
+  getUserName(): string {
+    const user = this.authService.getUser()
+    return user?.name
+  }
 }
 
 

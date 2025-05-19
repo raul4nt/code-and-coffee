@@ -84,29 +84,17 @@
   "users": [
     {
       "id": "1",
+      "name": "Administrador",
       "email": "admin@coffee.com",
       "password": "1234raul",
       "role": "admin",
       "token": ""
     },
     {
-      "id": "be07",
-      "email": "raul@silveira.com",
-      "password": "123456",
-      "role": "customer",
-      "token": ""
-    },
-    {
-      "id": "5da4",
-      "email": "oasdkoa@gmail.com",
-      "password": "123456",
-      "role": "customer",
-      "token": ""
-    },
-    {
-      "id": "fe01",
-      "email": "joao@gmail.com",
-      "password": "123456",
+      "id": "d5e7",
+      "name": "Raul Teste",
+      "email": "raulteste2@mail.com",
+      "password": "1234raul",
       "role": "customer",
       "token": ""
     }
@@ -246,6 +234,33 @@
       ],
       "total": 18.9,
       "createdAt": "2025-05-19T17:00:40.248Z"
+    },
+    {
+      "id": "9f1d",
+      "userId": "1",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        },
+        {
+          "id": "9",
+          "name": "Cold Brew",
+          "description": "Café preparado a frio por horas",
+          "price": 13.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/coldbrew.webp",
+          "added": true
+        }
+      ],
+      "total": 28.4,
+      "createdAt": "2025-05-19T18:40:48.428Z"
     }
   ]
 }

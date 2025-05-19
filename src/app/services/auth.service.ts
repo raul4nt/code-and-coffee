@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs';
 
@@ -10,7 +11,10 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   login(email: string, password: string): Observable<any> {
     return this.http
@@ -28,8 +32,9 @@ export class AuthService {
       );
   }
 
-  register(email: string, password: string): Observable<any> {
+  register(name: string, email: string, password: string): Observable<any> {
     const newUser = {
+      name,
       email,
       password,
       role: 'customer',
@@ -42,6 +47,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
@@ -52,7 +58,6 @@ export class AuthService {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
-
 
   getUserId(): number | null {
     const user = this.getUser();

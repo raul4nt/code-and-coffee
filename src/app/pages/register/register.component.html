@@ -1,5 +1,5 @@
 <div class="register-wrapper">
-  <h2 class="register-title">Faça parte desta loucura ☕️</h2>
+  <h2 class="register-title">Junte-se a nós ☕️</h2>
 
   <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
@@ -14,7 +14,7 @@
           name="name"
           class="form-control"
           required
-          [(ngModel)]="name"
+          [(ngModel)]="user.name"
         />
       </div>
 
@@ -26,7 +26,7 @@
           name="email"
           class="form-control"
           required
-          [(ngModel)]="email"
+          [(ngModel)]="user.email"
         />
       </div>
 
@@ -38,7 +38,7 @@
           name="password"
           class="form-control"
           required
-          [(ngModel)]="password"
+          [(ngModel)]="user.password"
         />
       </div>
 
@@ -50,7 +50,7 @@
           name="confirmPassword"
           class="form-control"
           required
-          [(ngModel)]="confirmPassword"
+          [(ngModel)]="user.confirmPassword"
         />
       </div>
 
