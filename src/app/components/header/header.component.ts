@@ -65,6 +65,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const user = this.authService.getUser()
     return user?.name
   }
+
+  navigateToAccount(): void {
+  this.router.navigate(['/my-account']);
+  // neste caso to usando o navigate, criando uma funçao propria pra navegar, pq lá no html ta como span(que é o que eu quero)
+  // com o span fica do estilo q eu quero, o problema é q ele n fica com o cursor aquele da maozinha quando passamos em cima(como se fsse uma tag A)
+  // ai usando um metodo especifico de navigaçao como o navigate(especificando a rota desejada, neste caso a my-account), ele fica e funciona como uma tag a mesmo
+  // mantendo o span
+}
 }
 
 

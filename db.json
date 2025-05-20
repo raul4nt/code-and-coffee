@@ -84,9 +84,9 @@
   "users": [
     {
       "id": "1",
-      "name": "Administrador",
+      "name": "Raul ADM",
       "email": "admin@coffee.com",
-      "password": "1234raul",
+      "password": "123raul",
       "role": "admin",
       "token": ""
     },
@@ -95,6 +95,14 @@
       "name": "Raul Teste",
       "email": "raulteste2@mail.com",
       "password": "1234raul",
+      "role": "customer",
+      "token": ""
+    },
+    {
+      "id": "f3b7",
+      "name": "Luis Ries",
+      "email": "ries@mail.com",
+      "password": "123ries",
       "role": "customer",
       "token": ""
     }
@@ -288,6 +296,150 @@
       ],
       "total": 26.9,
       "createdAt": "2025-05-19T19:31:36.823Z"
+    },
+    {
+      "id": "efab",
+      "userId": "1",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "4",
+          "name": "Americano",
+          "description": "Café expresso diluído",
+          "price": 9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/americano.png",
+          "added": true
+        },
+        {
+          "id": "10",
+          "name": "Affogato",
+          "description": "Café expresso com sorvete",
+          "price": 15.9,
+          "category": "Dessert",
+          "imageUrl": "assets/images/products/affogato.webp",
+          "added": true
+        },
+        {
+          "id": "2",
+          "name": "Cappuccino",
+          "description": "Com espuma de leite",
+          "price": 12.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/cappuccino.png",
+          "added": true
+        }
+      ],
+      "total": 37.4,
+      "createdAt": "2025-05-20T12:34:24.245Z"
+    },
+    {
+      "id": "b685",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "3",
+          "name": "Latte",
+          "description": "Café suave com leite",
+          "price": 11,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/latte.png",
+          "added": true
+        }
+      ],
+      "total": 11,
+      "createdAt": "2025-05-20T12:35:53.752Z"
+    },
+    {
+      "id": "f7ab",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "7",
+          "name": "Flat White",
+          "description": "Café aveludado",
+          "price": 12,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/flatwhite.png",
+          "added": true
+        },
+        {
+          "id": "4",
+          "name": "Americano",
+          "description": "Café expresso diluído",
+          "price": 9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/americano.png",
+          "added": true
+        }
+      ],
+      "total": 21,
+      "createdAt": "2025-05-20T12:36:10.420Z"
+    },
+    {
+      "id": "766a",
+      "userId": "1",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "3",
+          "name": "Latte",
+          "description": "Café suave com leite",
+          "price": 11,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/latte.png",
+          "added": true
+        },
+        {
+          "id": "4",
+          "name": "Americano",
+          "description": "Café expresso diluído",
+          "price": 9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/americano.png",
+          "added": true
+        },
+        {
+          "id": "10",
+          "name": "Affogato",
+          "description": "Café expresso com sorvete",
+          "price": 15.9,
+          "category": "Dessert",
+          "imageUrl": "assets/images/products/affogato.webp",
+          "added": true
+        }
+      ],
+      "total": 35.9,
+      "createdAt": "2025-05-20T13:54:29.409Z"
+    },
+    {
+      "id": "5e14",
+      "userId": "1",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "2",
+          "name": "Cappuccino",
+          "description": "Com espuma de leite",
+          "price": 12.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/cappuccino.png",
+          "added": true
+        },
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        }
+      ],
+      "total": 27.4,
+      "createdAt": "2025-05-20T13:55:18.928Z"
     }
   ]
 }

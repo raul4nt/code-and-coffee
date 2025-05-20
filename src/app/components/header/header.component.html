@@ -20,7 +20,14 @@
       </div>
 
       <div class="d-flex align-items-center" *ngIf="isLoggedIn()">
-      <span class="me-2 text-black">Olá, {{ getUserName() }}!</span>
+      <span
+        class="me-2 text-black"
+        style="cursor: pointer;"
+        (click)="navigateToAccount()">
+        Olá, {{ getUserName() }}!
+      </span>
+
+
       <a class="nav-link text-black me-3" routerLink="/my-orders" routerLinkActive="active-nav-link" [routerLinkActiveOptions]="{ exact: true }">PEDIDOS</a>
     </div>
 

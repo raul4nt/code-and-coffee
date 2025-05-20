@@ -26,14 +26,14 @@
   display: inline-block;
   text-align: center;
   font-weight: bold;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .navbar i {
   font-weight: bold;
   cursor: pointer;
   color: black;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   transition: color 0.3s ease;
 }
 

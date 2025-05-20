@@ -1,1 +1,65 @@
-<p>my-account works!</p>
+<div class="account-wrapper">
+  <h2 class="account-title">Minha conta</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+  <div class="account-box">
+    <form (ngSubmit)="onUpdate()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          [(ngModel)]="updatedUser.name"
+          [placeholder]="user.name"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          class="form-control"
+          [(ngModel)]="updatedUser.email"
+          [placeholder]="user.email"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="currentPassword" class="form-label">Senha atual</label>
+        <input
+          type="password"
+          id="currentPassword"
+          name="currentPassword"
+          class="form-control"
+          [(ngModel)]="updatedUser.currentPassword"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="newPassword" class="form-label">Nova senha</label>
+        <input
+          type="password"
+          id="newPassword"
+          name="newPassword"
+          class="form-control"
+          [(ngModel)]="updatedUser.newPassword"
+        />
+
+          <br>
+          <span>Dica: se não quiser mudar de senha, é só deixar a nova em branco!</span>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-dark">Atualizar</button>
+      </div>
+    </form>
+  </div>
+
+</div>
