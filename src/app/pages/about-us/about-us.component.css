@@ -1,39 +1,40 @@
 .about-us-container {
-  max-width: 800px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 3rem 2rem;
   font-family: 'Montserrat', sans-serif;
   color: #392620;
+  text-align: justify;
 }
 
 .about-title {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  padding-bottom: 0;
 }
 
 .about-text {
-  text-align: justify;
-  margin: 0 auto 2rem;
-  max-width: 700px;
-  line-height: 1.6;
+  margin: 0 auto 3rem;
+  max-width: 1000px;
+  line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 .about-highlight {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-style: italic;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #392620;
   text-align: center;
 }
 
 .about-image {
   width: 100%;
-  max-width: 600px;
+  max-width: 1000px;
   height: auto;
-  border-radius: 8px;
-  margin: 0 auto 1.5rem;
+  border-radius: 12px;
+  margin: 0 auto 2rem;
   display: block;
   filter: grayscale(100%);
   transition: transform 0.3s ease, filter 0.3s ease 2s;
