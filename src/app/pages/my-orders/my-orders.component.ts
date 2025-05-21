@@ -19,7 +19,7 @@ export class MyOrdersComponent implements OnInit {
   }
 
   loadOrders(): void {
-    this.orderService.getOrders().subscribe({
+    this.orderService.getOrdersFromAuthenticatedUser().subscribe({
       next: (data) => {
         this.orders = data;
       },

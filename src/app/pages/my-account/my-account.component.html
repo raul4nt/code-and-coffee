@@ -31,18 +31,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="currentPassword" class="form-label">Senha atual</label>
-        <input
-          type="password"
-          id="currentPassword"
-          name="currentPassword"
-          class="form-control"
-          [(ngModel)]="updatedUser.currentPassword"
-          required
-        />
-      </div>
-
-      <div class="mb-3">
         <label for="newPassword" class="form-label">Nova senha</label>
         <input
           type="password"
@@ -51,10 +39,22 @@
           class="form-control"
           [(ngModel)]="updatedUser.newPassword"
         />
-
           <br>
-          <span>Dica: se não quiser mudar de senha, é só deixar a nova em branco!</span>
+          <span class="tip">DICA: preencha apenas os campos que deseja alterar!</span>
       </div>
+
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Confirme com sua senha atual</label>
+          <input
+            type="password"
+            id="currentPassword"
+            name="currentPassword"
+            class="form-control"
+            [(ngModel)]="updatedUser.currentPassword"
+            required
+          />
+      </div>
+
 
       <div class="d-flex justify-content-end">
         <button type="submit" class="btn btn-dark">Atualizar</button>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { switchMap } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +12,18 @@ import { switchMap } from 'rxjs/operators';
 export class OrderService {
   private apiUrl = 'http://localhost:3000/orders';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   createOrder(order: Order): Observable<Order> {
     return this.http.post<Order>(this.apiUrl, order);
   }
 
-  getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiUrl);
+  getOrdersFromAuthenticatedUser(): Observable<Order[]> {
+    const userId = this.authService.getUserId(); 
+    return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   getOrderById(id: number): Observable<Order> {

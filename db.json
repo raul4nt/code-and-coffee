@@ -84,12 +84,39 @@
   "users": [
     {
       "id": "45e7",
-      "name": "Raul ADM",
+      "name": "Adm Raul",
       "email": "admin@coffee.com",
       "password": "123raul",
       "role": "admin",
       "token": ""
+    },
+    {
+      "id": "d993",
+      "name": "Joao Pedro",
+      "email": "jp@mail.com",
+      "password": "123joao",
+      "role": "customer",
+      "token": ""
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "7007",
+      "userId": "d993",
+      "status": "Aguardando confirmação",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        }
+      ],
+      "total": 8,
+      "createdAt": "2025-05-21T12:48:55.141Z"
+    }
+  ]
 }
