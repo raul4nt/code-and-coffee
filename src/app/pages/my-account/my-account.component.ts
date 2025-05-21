@@ -78,34 +78,43 @@ export class MyAccountComponent implements OnInit {
 
 onDeleteAccount() {
   const confirmed = window.confirm('Tem certeza que deseja apagar sua conta? Essa ação não poderá ser desfeita.');
-  // mensagenzinha padrao de navegador(aquele pop-up) pra perguntar se o usuario quer mesmo apagar a conta
+  // mensagenzinha padrão de navegador (aquele pop-up) pra perguntar se o usuário quer mesmo apagar a conta
   if (!confirmed) return;
 
   this.http.get<any[]>(`http://localhost:3000/orders?userId=${this.user.id}`).subscribe({
-    // pegamos todos os pedidos relacionados a este usuario
+    // pegamos todos os pedidos relacionados a este usuário
     next: (orders) => {
       const deleteRequests = orders.map(order =>
         this.http.delete(`http://localhost:3000/orders/${order.id}`)
-        // usamos o metodo map pra apagar um por um
+        // usamos o método map pra apagar um por um
       );
 
-      forkJoin(deleteRequests).subscribe({
-      // e, por fim, usamos o forkJoin do rxjs(reativo) pra fazer tanto o delete de orders tanto o de usuario
-      // basicamente ele executa varias requisiçoes(observables nesse caso ne) em paralelo e aguarda todas terminarem
-      // pra continuar(se nao embola tudo, posso estar deletando as orders e o codigo deletar o usuario antes pq n esperou terminar)
+      const deleteUser = () => {
+        this.http.delete(`http://localhost:3000/users/${this.user.id}`).subscribe(() => {
+          localStorage.removeItem('authToken');
+          localStorage.removeItem('user');
+          this.router.navigate(['/login']);
+        });
+      };
 
-      // é basicamente um async/await, equivalente ao Promise.all
+      if (deleteRequests.length > 0) {
+        forkJoin(deleteRequests).subscribe({
+          // se houver pedidos, usamos o forkJoin do rxjs (reativo) pra apagar todos os pedidos antes de apagar o usuário
+          // basicamente ele executa várias requisições (observables nesse caso né) em paralelo e aguarda todas terminarem
+          // pra continuar (se não, embola tudo — posso estar deletando as orders e o código deletar o usuário antes porque não esperou terminar)
 
-        next: () => {
-          this.http.delete(`http://localhost:3000/users/${this.user.id}`).subscribe(() => {
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('user');
-            this.router.navigate(['/login']);
-          });
-        }
-      });
+          // é basicamente um async/await, equivalente ao Promise.all
+          next: () => deleteUser(),
+          error: () => this.errorMessage = 'Erro ao apagar pedidos. Tente novamente.'
+        });
+      } else {
+        deleteUser();
+        // se não houver pedidos, já apagamos direto o usuário
+      }
+    },
+    error: () => {
+      this.errorMessage = 'Erro ao verificar pedidos. Tente novamente.';
     }
   });
 }
-
 }

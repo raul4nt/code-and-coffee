@@ -57,14 +57,31 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.register(name, email, password).subscribe({
-      next: () => {
-        this.successMessage = 'Cadastro realizado com sucesso! Redirecionando pra página de login...';
-        setTimeout(() => this.router.navigate(['/login']), 3000);
+    this.authService.checkEmailExists(email).subscribe({
+      next: (exists) => {
+        if (exists) {
+          this.errorMessage = 'O email já existe no banco de dados.';
+          return;
+        }
+      // sempre precisamos usar o subscribe pra de fato pegar o VALOR de um observable. se tentamos usar q nem fazemos em apis back-end,
+      // exemplo: if checkEmailExists, isso n daria certo pq a gente pega o observable e nao o valor dele
+      // nesse caso nao é apenas um boolean, é um Observable<boolean>, entao pra termos acesso ao boolean q ta "dentro" do observable precisamos
+      // do subscribe.
+
+        this.authService.register(name, email, password).subscribe({
+          next: () => {
+            this.successMessage = 'Cadastro realizado com sucesso! Redirecionando pra página de login...';
+            setTimeout(() => this.router.navigate(['/login']), 3000);
+          },
+          error: (err) => {
+            console.error('Erro ao registrar:', err);
+            this.errorMessage = 'Erro ao registrar. Tente novamente.';
+          }
+        });
       },
       error: (err) => {
-        console.error('Erro ao registrar:', err);
-        this.errorMessage = 'Erro ao registrar. Tente novamente.';
+        console.error('Erro ao verificar email:', err);
+        this.errorMessage = 'Erro ao verificar email. Tente novamente.';
       }
     });
   }

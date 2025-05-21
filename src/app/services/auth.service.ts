@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { tap } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,4 +64,12 @@ export class AuthService {
     const user = this.getUser();
     return user ? user.id : null;
   }
+
+  checkEmailExists(email: string): Observable<boolean> {
+    return this.http.get<User[]>(`${this.apiUrl}/users`).pipe(
+      map(users => users.some(user => user.email.toLowerCase() === email.toLowerCase()))
+    );
+  // temos q usar/converter usando o toLowerCase pq o json-server nao suporta a comparaçao sem ser case sensitive
+}
+
 }
