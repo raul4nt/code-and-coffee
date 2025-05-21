@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-my-account',
@@ -27,7 +29,8 @@ export class MyAccountComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,4 +75,37 @@ export class MyAccountComponent implements OnInit {
       }
     });
   }
+
+onDeleteAccount() {
+  const confirmed = window.confirm('Tem certeza que deseja apagar sua conta? Essa ação não poderá ser desfeita.');
+  // mensagenzinha padrao de navegador(aquele pop-up) pra perguntar se o usuario quer mesmo apagar a conta
+  if (!confirmed) return;
+
+  this.http.get<any[]>(`http://localhost:3000/orders?userId=${this.user.id}`).subscribe({
+    // pegamos todos os pedidos relacionados a este usuario
+    next: (orders) => {
+      const deleteRequests = orders.map(order =>
+        this.http.delete(`http://localhost:3000/orders/${order.id}`)
+        // usamos o metodo map pra apagar um por um
+      );
+
+      forkJoin(deleteRequests).subscribe({
+      // e, por fim, usamos o forkJoin do rxjs(reativo) pra fazer tanto o delete de orders tanto o de usuario
+      // basicamente ele executa varias requisiçoes(observables nesse caso ne) em paralelo e aguarda todas terminarem
+      // pra continuar(se nao embola tudo, posso estar deletando as orders e o codigo deletar o usuario antes pq n esperou terminar)
+
+      // é basicamente um async/await, equivalente ao Promise.all
+
+        next: () => {
+          this.http.delete(`http://localhost:3000/users/${this.user.id}`).subscribe(() => {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            this.router.navigate(['/login']);
+          });
+        }
+      });
+    }
+  });
+}
+
 }

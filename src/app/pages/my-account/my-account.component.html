@@ -39,27 +39,29 @@
           class="form-control"
           [(ngModel)]="updatedUser.newPassword"
         />
-          <br>
-          <span class="tip">DICA: preencha apenas os campos que deseja alterar!</span>
+        <br />
+        <span class="tip">DICA: preencha apenas os campos que deseja alterar!</span>
       </div>
 
-        <div class="mb-3">
-          <label for="currentPassword" class="form-label">Confirme com sua senha atual</label>
-          <input
-            type="password"
-            id="currentPassword"
-            name="currentPassword"
-            class="form-control"
-            [(ngModel)]="updatedUser.currentPassword"
-            required
-          />
+      <div class="mb-3">
+        <label for="currentPassword" class="form-label">Confirme com sua senha atual</label>
+        <input
+          type="password"
+          id="currentPassword"
+          name="currentPassword"
+          class="form-control"
+          [(ngModel)]="updatedUser.currentPassword"
+          required
+        />
       </div>
 
-
-      <div class="d-flex justify-content-end">
+      <div class="d-flex justify-content-end mt-4">
         <button type="submit" class="btn btn-dark">Atualizar</button>
       </div>
     </form>
   </div>
-
+  
+  <div class="mt-4">
+    <button type="button" class="btn btn-danger" (click)="onDeleteAccount()">Apagar minha conta</button>
+  </div>
 </div>

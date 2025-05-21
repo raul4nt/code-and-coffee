@@ -56,3 +56,19 @@
   background-color: #222;
 }
 
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  min-width: 120px;
+}
+
+.btn-danger:hover {
+  background-color: #bb2d3b;
+}
+
+
