@@ -32,11 +32,16 @@
   padding-left: 0;
   padding-right: 0;
   gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 .footer .links-row a {
   text-align: center;
   white-space: nowrap;
+  flex-grow: 1;
+  padding: 5px 10px;
+  font-size: 1rem;
 }
 
 .ps-0 {
@@ -45,20 +50,67 @@
 
 .card-badges {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  gap: 10px;
 }
 
 .card-flag {
-  width: 40px;
-  margin: 0 10px;
+  width: 35px;
+  height: auto;
+  margin: 0 5px;
   vertical-align: middle;
 }
 
-.row.align-items-center {
+.footer .row.align-items-center {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
+.footer .col-12 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
 
+@media (min-width: 768px) {
+  .footer .links-row {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-bottom: 30px;
+  }
+
+  .footer .links-row a {
+    font-size: 1.25rem;
+    padding: 0 10px;
+  }
+
+  .footer .card-badges {
+    justify-content: space-between;
+    margin-top: 0;
+    gap: 0;
+  }
+
+  .card-flag {
+    width: 40px;
+    margin: 0 10px;
+  }
+
+  .footer .row.align-items-center {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer .col-12 {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

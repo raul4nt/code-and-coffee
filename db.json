@@ -91,5 +91,87 @@
       "token": ""
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "4804",
+      "userId": "45e7",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "2",
+          "name": "Cappuccino",
+          "description": "Com espuma de leite",
+          "price": 12.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/cappuccino.png",
+          "added": true
+        },
+        {
+          "id": "6",
+          "name": "Macchiato",
+          "description": "Café expresso com gota de leite",
+          "price": 10.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/macchiato.png",
+          "added": true
+        }
+      ],
+      "total": 23,
+      "createdAt": "2025-05-21T13:58:02.492Z"
+    },
+    {
+      "id": "5426",
+      "userId": "45e7",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        }
+      ],
+      "total": 8,
+      "createdAt": "2025-05-21T14:14:52.089Z"
+    },
+    {
+      "id": "a3d1",
+      "userId": "45e7",
+      "status": "Em preparação",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        },
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        },
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        }
+      ],
+      "total": 37.8,
+      "createdAt": "2025-05-21T14:14:57.577Z"
+    }
+  ]
 }

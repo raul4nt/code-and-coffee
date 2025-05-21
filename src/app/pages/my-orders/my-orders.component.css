@@ -1,6 +1,6 @@
 .orders-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
   justify-items: center;
   padding: 20px;
@@ -48,14 +48,45 @@
   font-weight: bold;
 }
 
-.order-buttons {
+.order-buttons-container {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 15px;
   width: 100%;
   justify-content: center;
 }
 
-.order-buttons button {
-  flex: 1;
+.order-buttons-container button {
+  flex: 1 1 auto;
+  min-width: 140px;
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .orders-container {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .order-card {
+    max-width: 100%;
+  }
+
+  .order-buttons-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .order-buttons-container button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .orders-container {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
 }

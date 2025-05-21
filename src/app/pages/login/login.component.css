@@ -18,6 +18,7 @@ body, html {
   font-size: 2.2rem;
   margin-bottom: 30px;
   margin-top: 60px;
+  text-align: center;
 }
 
 .login-box {
@@ -56,6 +57,7 @@ body, html {
   border-radius: 8px;
   font-size: 1.1rem;
   min-width: 120px;
+  width: 100%;
 }
 
 .btn-dark:hover {
@@ -74,4 +76,48 @@ body, html {
 
 .text-center button.btn-link {
   font-size: 1rem;
+}
+
+@media (max-width: 575px) {
+  .login-title {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .login-box {
+    padding: 30px 20px;
+    margin: 0 10px;
+  }
+
+  .login-box label.form-label {
+    font-size: 1rem;
+  }
+
+  .login-box input.form-control {
+    height: 44px;
+    font-size: 1rem;
+  }
+
+  .d-flex.justify-content-end {
+    justify-content: center !important;
+  }
+
+  .btn-dark {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  .text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px !important;
+  }
+
+  .text-center span,
+  .text-center button.btn-link {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
 }

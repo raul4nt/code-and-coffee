@@ -1,14 +1,5 @@
 TODO: 
 
-criar página de edição de usuario(usuario editar seu nome ou email, talvez senha, e excluir sua conta)
-
-checar campo token do user model 
-
-
-CRUDs completos (pelo menos um por aluno) na aplicação com utilização de tabela e formulário;
-
-
-
 
 Realizados ✅:
 
