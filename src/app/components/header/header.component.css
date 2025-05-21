@@ -229,7 +229,8 @@
 
 @media (max-width: 991.98px) {
   .navbar .d-flex.align-items-center > a:not(.logo-link),
-  .navbar .d-flex.align-items-center > div:not(.search-container) {
+  .navbar .d-flex.align-items-center > div.user-info,
+  .navbar .d-flex.align-items-center > div.logout-button {
     display: none !important;
   }
 
@@ -295,3 +296,4 @@
     font-size: 0.9rem;
   }
 }
+

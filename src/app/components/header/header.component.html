@@ -21,9 +21,11 @@
       </button>
 
       <div *ngIf="searchVisible" class="search-bar" #searchBarElement>
-        <input type="text" class="form-control" placeholder="Buscar produtos..." [(ngModel)]="searchTerm" (keydown.enter)="onSearch()" aria-label="Campo de busca de produtos"/>
+        <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="searchTerm" (keydown.enter)="onSearch()" aria-label="Campo de busca de produtos"/>
         <button class="btn btn-dark ms-2" (click)="onSearch()" aria-label="Buscar" title="Ok">Ok</button>
       </div>
+
+
 
       <div class="d-flex align-items-center" *ngIf="isLoggedIn()">
         <span

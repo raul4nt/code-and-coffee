@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   sidebarOpen = false;
   private routerSub!: Subscription;
 
-  // Adiciona ViewChild para a lupa e para a barra de pesquisa
   @ViewChild('searchToggleButton') searchToggleButton!: ElementRef;
   @ViewChild('searchBarElement') searchBarElement!: ElementRef;
 
