@@ -84,7 +84,7 @@
   "users": [
     {
       "id": "45e7",
-      "name": "Adm Raul",
+      "name": "Raulzito Zito",
       "email": "admin@coffee.com",
       "password": "123raul",
       "role": "admin",
@@ -172,6 +172,60 @@
       ],
       "total": 37.8,
       "createdAt": "2025-05-21T14:14:57.577Z"
+    },
+    {
+      "id": "3339",
+      "userId": "45e7",
+      "status": "Cancelado",
+      "products": [
+        {
+          "id": "5",
+          "name": "Mocha",
+          "description": "Café com sabor de chocolate",
+          "price": 14.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/mocha.png",
+          "added": true
+        },
+        {
+          "id": "9",
+          "name": "Cold Brew",
+          "description": "Café preparado a frio por horas",
+          "price": 13.5,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/coldbrew.webp",
+          "added": true
+        },
+        {
+          "id": "8",
+          "name": "Iced Coffee",
+          "description": "Café gelado",
+          "price": 10.9,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/icedcoffee.webp",
+          "added": true
+        }
+      ],
+      "total": 39.3,
+      "createdAt": "2025-05-22T13:49:36.111Z"
+    },
+    {
+      "id": "a0df",
+      "userId": "45e7",
+      "status": "Entregue",
+      "products": [
+        {
+          "id": "1",
+          "name": "Espresso",
+          "description": "Café forte",
+          "price": 8,
+          "category": "Coffee",
+          "imageUrl": "assets/images/products/espresso.png",
+          "added": true
+        }
+      ],
+      "total": 8,
+      "createdAt": "2025-05-22T13:50:33.721Z"
     }
   ]
 }
