@@ -1,4 +1,4 @@
-import { Component, ElementRef, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { ProductService } from '../../services/product.service';
@@ -14,11 +14,24 @@ Swiper.use([Autoplay, Navigation]);
   templateUrl: './product-carousel.component.html',
   styleUrls: ['./product-carousel.component.css']
 })
-export class ProductCarouselComponent implements OnInit, AfterViewInit {
-  products: Product[] = [];
+export class ProductCarouselComponent implements OnInit {
+  private _products: Product[] = [];
   isLoading = true;
-  @ViewChild('swiperContainer', { static: false }) swiperContainer!: ElementRef;
-  swiperInstance!: Swiper;
+  @ViewChild('swiperContainer') swiperContainer!: ElementRef;
+  swiperInstance: Swiper | undefined;
+
+  get products(): Product[] {
+    return this._products;
+  }
+
+  set products(value: Product[]) {
+    this._products = value;
+    setTimeout(() => {
+      if (this.products.length > 0) {
+        this.initSwiper();
+      }
+    }, 0);
+  }
 
   constructor(private productService: ProductService) {}
 
@@ -33,39 +46,38 @@ export class ProductCarouselComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (this.products.length > 0) {
-      this.initSwiper();
-    }
-  }
-
   private initSwiper(): void {
-    this.swiperInstance = new Swiper(this.swiperContainer.nativeElement, {
-      slidesPerView: 3,
-      spaceBetween: 20,
-      loop: true,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        320: {
-          slidesPerView: 1,
-          spaceBetween: 10
-        },
-        768: {
-          slidesPerView: 2,
-          spaceBetween: 20
-        },
-        1024: {
-          slidesPerView: 3,
-          spaceBetween: 20
-        }
+    if (this.swiperContainer?.nativeElement) {
+      if (this.swiperInstance) {
+        this.swiperInstance.destroy(true, true);
       }
-    });
+      this.swiperInstance = new Swiper(this.swiperContainer.nativeElement, {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        breakpoints: {
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 10
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 20
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20
+          }
+        }
+      });
+    }
   }
 }

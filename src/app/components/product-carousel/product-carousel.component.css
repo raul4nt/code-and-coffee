@@ -22,14 +22,9 @@
   height: auto;
   margin-bottom: 10px;
   border-radius: 4px;
-  filter: grayscale(100%);
-  transition: filter 0.3s ease;
   cursor: pointer;
 }
 
-.product-card img:hover {
-  filter: grayscale(0%);
-}
 
 .product-card h5 {
   margin: 0.5rem 0;
