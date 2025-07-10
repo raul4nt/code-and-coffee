@@ -1,12 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user.model';
+import { User } from '@supabase/supabase-js'; // Importa o tipo User do Supabase
 import { AuthService } from '../../services/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { SupabaseService } from '../../services/supabase.service'; // Importamos o SupabaseService
 import { Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-my-account',
@@ -16,219 +14,119 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  user!: User;
+  // O tipo do usuário agora é o User do Supabase
+  user: User | null = null;
 
   updatedUser = {
     name: '',
     email: '',
-    currentPassword: '',
     newPassword: ''
   };
 
   errorMessage = '';
   successMessage = '';
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
-    private http: HttpClient,
+    private supabaseService: SupabaseService, // Usaremos para atualizar o usuário
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    const loggedUser = this.authService.getUser();
-    if (loggedUser) {
-      this.user = loggedUser;
+    // Pegamos o usuário diretamente do serviço de autenticação
+    this.user = this.authService.getUser();
+    if (this.user) {
+      // Pré-populamos os campos com os dados existentes
+      this.updatedUser.name = this.user.user_metadata['name'];
+      this.updatedUser.email = this.user.email || '';
     }
   }
 
-  onUpdate(): void {
+  async onUpdate(): Promise<void> {
     this.errorMessage = '';
     this.successMessage = '';
+    this.isLoading = true;
 
-    const { name, email, currentPassword, newPassword } = this.updatedUser;
-
-    if (!currentPassword) {
-      this.errorMessage = 'Informe sua senha atual.';
+    if (!this.user) {
+      this.errorMessage = 'Usuário não encontrado.';
+      this.isLoading = false;
       return;
     }
 
-    if (currentPassword !== this.user.password) {
-      this.errorMessage = 'Senha atual incorreta.';
-      return;
-    }
+    try {
+      const { name, email, newPassword } = this.updatedUser;
 
-    const updatedData: User = {
-      ...this.user,
-      name: name.trim() || this.user.name,
-      email: email.trim() || this.user.email,
-      password: newPassword ? newPassword : this.user.password
-    };
+      // O objeto de atualização para o Supabase
+      const updateData: any = {};
 
-    this.http.put<User>(`${environment.apiUrl}users/${this.user.id}`, updatedData).subscribe({
-      next: (updatedUser) => {
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-        this.user = updatedUser;
-        this.updatedUser = { name: '', email: '', currentPassword: '', newPassword: '' };
-        this.successMessage = 'Informações atualizadas com sucesso!';
-      },
-      error: () => {
-        this.errorMessage = 'Erro ao atualizar informações. Tente novamente.';
+      // Adiciona a nova senha se ela foi preenchida
+      if (newPassword) {
+        updateData.password = newPassword;
       }
-    });
+
+      // Adiciona o novo email se ele mudou
+      if (email && email.trim() !== this.user.email) {
+        updateData.email = email.trim();
+      }
+
+      // Adiciona o novo nome nos metadados se ele mudou
+      if (name && name.trim() !== this.user.user_metadata['name']) {
+        updateData.data = { ...this.user.user_metadata, name: name.trim() };
+      }
+
+      // Se não há nada para atualizar, apenas informa o usuário
+      if (Object.keys(updateData).length === 0) {
+        this.successMessage = 'Nenhuma informação nova para atualizar.';
+        this.isLoading = false;
+        return;
+      }
+
+      // Chama o método de atualização do Supabase
+      const { data, error } = await this.supabaseService.supabase.auth.updateUser(updateData);
+
+      if (error) {
+        throw error;
+      }
+
+      // Limpa o campo de senha e exibe sucesso
+      this.updatedUser.newPassword = '';
+      this.successMessage = 'Informações atualizadas com sucesso!';
+
+    } catch (error: any) {
+      this.errorMessage = `Erro ao atualizar: ${error.message}`;
+    } finally {
+      this.isLoading = false;
+    }
   }
 
-  onDeleteAccount() {
-    const confirmed = window.confirm('Tem certeza que deseja apagar sua conta? Essa ação não poderá ser desfeita.');
-    if (!confirmed) return;
+  async onDeleteAccount(): Promise<void> {
+    // IMPORTANTE: Substituir window.confirm por um modal customizado na sua UI
+    const confirmed = window.confirm('Tem certeza que deseja apagar sua conta? Todos os seus pedidos também serão apagados. Essa ação não poderá ser desfeita.');
+    if (!confirmed || !this.user) return;
 
-    this.http.get<any[]>(`${environment.apiUrl}orders?userId=${this.user.id}`).subscribe({
-      next: (orders) => {
-        const deleteRequests = orders.map(order =>
-          this.http.delete(`${environment.apiUrl}orders/${order.id}`)
-        );
+    this.isLoading = true;
+    this.errorMessage = '';
 
-        const deleteUser = () => {
-          this.http.delete(`${environment.apiUrl}users/${this.user.id}`).subscribe(() => {
-            localStorage.removeItem('authToken');
-            localStorage.removeItem('user');
-            this.router.navigate(['/login']);
-          });
-        };
+    try {
+      // Esta é a implementação correta para o conceito A.
+      // Você deve chamar uma Edge Function para apagar o usuário e seus dados.
+      // A função abaixo é um exemplo de como você faria a chamada.
+      const { error } = await this.supabaseService.supabase.functions.invoke('delete-user-account');
 
-        if (deleteRequests.length > 0) {
-          forkJoin(deleteRequests).subscribe({
-            next: () => deleteUser(),
-            error: () => this.errorMessage = 'Erro ao apagar pedidos. Tente novamente.'
-          });
-        } else {
-          deleteUser();
-        }
-      },
-      error: () => {
-        this.errorMessage = 'Erro ao verificar pedidos. Tente novamente.';
+      if (error) {
+        throw error;
       }
-    });
+
+      // Se a Edge Function foi bem sucedida, ela já fez o logout e invalidou a sessão.
+      // Apenas navegamos para o login.
+      alert('Conta apagada com sucesso.'); // Substituir por um toast/snackbar
+      this.router.navigate(['/login']);
+
+    } catch (error: any) {
+      this.errorMessage = `Erro ao apagar a conta: ${error.message}`;
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
-
-
-// import { CommonModule } from '@angular/common';
-// import { Component, OnInit } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-// import { User } from '../../models/user.model';
-// import { AuthService } from '../../services/auth.service';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
-// import { forkJoin } from 'rxjs';
-
-// @Component({
-//   selector: 'app-my-account',
-//   standalone: true,
-//   imports: [CommonModule, FormsModule],
-//   templateUrl: './my-account.component.html',
-//   styleUrl: './my-account.component.css'
-// })
-// export class MyAccountComponent implements OnInit {
-//   user!: User;
-
-//   updatedUser = {
-//     name: '',
-//     email: '',
-//     currentPassword: '',
-//     newPassword: ''
-//   };
-
-//   errorMessage = '';
-//   successMessage = '';
-
-//   constructor(
-//     private authService: AuthService,
-//     private http: HttpClient,
-//     private router: Router
-//   ) {}
-
-//   ngOnInit(): void {
-//     const loggedUser = this.authService.getUser();
-//     if (loggedUser) {
-//       this.user = loggedUser;
-//     }
-//   }
-
-//   onUpdate(): void {
-//     this.errorMessage = '';
-//     this.successMessage = '';
-
-//     const { name, email, currentPassword, newPassword } = this.updatedUser;
-
-//     if (!currentPassword) {
-//       this.errorMessage = 'Informe sua senha atual.';
-//       return;
-//     }
-
-//     if (currentPassword !== this.user.password) {
-//       this.errorMessage = 'Senha atual incorreta.';
-//       return;
-//     }
-
-//     const updatedData: User = {
-//       ...this.user,
-//       name: name.trim() || this.user.name,
-//       email: email.trim() || this.user.email,
-//       password: newPassword ? newPassword : this.user.password
-//     };
-
-//     this.http.put<User>(`http://localhost:3000/users/${this.user.id}`, updatedData).subscribe({
-//       next: (updatedUser) => {
-//         localStorage.setItem('user', JSON.stringify(updatedUser));
-//         this.user = updatedUser;
-//         this.updatedUser = { name: '', email: '', currentPassword: '', newPassword: '' };
-//         this.successMessage = 'Informações atualizadas com sucesso!';
-//       },
-//       error: () => {
-//         this.errorMessage = 'Erro ao atualizar informações. Tente novamente.';
-//       }
-//     });
-//   }
-
-// onDeleteAccount() {
-//   const confirmed = window.confirm('Tem certeza que deseja apagar sua conta? Essa ação não poderá ser desfeita.');
-//   // mensagenzinha padrão de navegador (aquele pop-up) pra perguntar se o usuário quer mesmo apagar a conta
-//   if (!confirmed) return;
-
-//   this.http.get<any[]>(`http://localhost:3000/orders?userId=${this.user.id}`).subscribe({
-//     // pegamos todos os pedidos relacionados a este usuário
-//     next: (orders) => {
-//       const deleteRequests = orders.map(order =>
-//         this.http.delete(`http://localhost:3000/orders/${order.id}`)
-//         // usamos o método map pra apagar um por um
-//       );
-
-//       const deleteUser = () => {
-//         this.http.delete(`http://localhost:3000/users/${this.user.id}`).subscribe(() => {
-//           localStorage.removeItem('authToken');
-//           localStorage.removeItem('user');
-//           this.router.navigate(['/login']);
-//         });
-//       };
-
-//       if (deleteRequests.length > 0) {
-//         forkJoin(deleteRequests).subscribe({
-//           // se houver pedidos, usamos o forkJoin do rxjs (reativo) pra apagar todos os pedidos antes de apagar o usuário
-//           // basicamente ele executa várias requisições (observables nesse caso né) em paralelo e aguarda todas terminarem
-//           // pra continuar (se não, embola tudo — posso estar deletando as orders e o código deletar o usuário antes porque não esperou terminar)
-
-//           // é basicamente um async/await, equivalente ao Promise.all
-//           next: () => deleteUser(),
-//           error: () => this.errorMessage = 'Erro ao apagar pedidos. Tente novamente.'
-//         });
-//       } else {
-//         deleteUser();
-//         // se não houver pedidos, já apagamos direto o usuário
-//       }
-//     },
-//     error: () => {
-//       this.errorMessage = 'Erro ao verificar pedidos. Tente novamente.';
-//     }
-//   });
-// }
-// }

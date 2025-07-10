@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   getUserName(): string {
     const user = this.authService.getUser();
-    return user?.name || 'Usuário';
+    return user?.user_metadata['name'] || 'Usuário';
   }
 
   navigateToAccount(): void {

@@ -1,4 +1,4 @@
-<div class="account-wrapper">
+<div *ngIf="user" class="account-wrapper">
   <h2 class="account-title">Minha conta</h2>
 
   <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
@@ -14,7 +14,7 @@
           name="name"
           class="form-control"
           [(ngModel)]="updatedUser.name"
-          [placeholder]="user.name"
+          [placeholder]="user.user_metadata['name'] || 'Carregando...'"
         />
       </div>
 
@@ -26,7 +26,7 @@
           name="email"
           class="form-control"
           [(ngModel)]="updatedUser.email"
-          [placeholder]="user.email"
+          [placeholder]="user.email || 'Carregando...'"
         />
       </div>
 
@@ -43,25 +43,22 @@
         <span class="tip">DICA: preencha apenas os campos que deseja alterar!</span>
       </div>
 
-      <div class="mb-3">
-        <label for="currentPassword" class="form-label">Confirme com sua senha atual</label>
-        <input
-          type="password"
-          id="currentPassword"
-          name="currentPassword"
-          class="form-control"
-          [(ngModel)]="updatedUser.currentPassword"
-          required
-        />
-      </div>
-
       <div class="d-flex justify-content-end mt-4">
-        <button type="submit" class="btn btn-dark">Atualizar</button>
+        <button type="submit" class="btn btn-dark" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Atualizar</span>
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm"></span>
+        </button>
       </div>
     </form>
   </div>
-  
+
   <div class="mt-4">
-    <button type="button" class="btn btn-danger" (click)="onDeleteAccount()">Apagar minha conta</button>
+    <button type="button" class="btn btn-danger" (click)="onDeleteAccount()" [disabled]="isLoading">Apagar minha conta</button>
+  </div>
+</div>
+
+<div *ngIf="!user" class="text-center mt-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>

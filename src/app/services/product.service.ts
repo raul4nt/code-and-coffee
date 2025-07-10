@@ -1,62 +1,67 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { SupabaseService } from './supabase.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = `${environment.apiUrl}products`;
+  constructor(private supabaseService: SupabaseService) { }
 
-  constructor(private http: HttpClient) { }
+  async getProducts(): Promise<Product[]> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('products')
+      .select('*');
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    if (error) {
+      console.error('Erro ao buscar produtos:', error);
+      return [];
+    }
+
+    // O Supabase já retorna os dados no formato correto, assumindo que seu model Product bate com a tabela.
+    return data as Product[];
   }
 
-  addProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+  async addProduct(product: Omit<Product, 'id' | 'created_at'>): Promise<Product | null> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('products')
+      .insert([product])
+      .select(); // .select() faz com que o registro inserido seja retornado
+
+    if (error) {
+      console.error('Erro ao adicionar produto:', error);
+      return null;
+    }
+
+    return data ? data[0] : null;
   }
 
-  updateProduct(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
+  async updateProduct(product: Product): Promise<Product | null> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('products')
+      .update(product)
+      .eq('id', product.id)
+      .select();
+
+    if (error) {
+      console.error('Erro ao atualizar produto:', error);
+      return null;
+    }
+
+    return data ? data[0] : null;
   }
 
-  deleteProduct(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  async deleteProduct(id: number): Promise<boolean> {
+    const { error } = await this.supabaseService.supabase
+      .from('products')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Erro ao deletar produto:', error);
+      return false;
+    }
+
+    return true;
   }
 }
-
-
-// import { HttpClient } from '@angular/common/http';
-// import { Injectable } from '@angular/core';
-// import { Product } from '../models/product.model';
-// import { Observable } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ProductService {
-//   private apiUrl = 'http://localhost:3000/products'
-
-//   constructor(private http: HttpClient) { }
-
-//   getProducts(): Observable<Product[]> {
-//     return this.http.get<Product[]>(this.apiUrl);
-//   }
-
-//   addProduct(product: Product): Observable<Product> {
-//     return this.http.post<Product>(this.apiUrl, product);
-//   }
-
-//   updateProduct(product: Product): Observable<Product> {
-//     return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
-//   }
-
-//   deleteProduct(id: number): Observable<void> {
-//     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-//   }
-
-// }

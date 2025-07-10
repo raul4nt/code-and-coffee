@@ -22,20 +22,18 @@ export class LoginComponent {
     private route: ActivatedRoute
   ) {}
 
-  onLogin() {
-    this.authService.login(this.email, this.password).subscribe({
-      next: () => {
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        // se tiver uma returnUrl(checar auth guard), redirecionara pra la ao logar,
-        // se nao, vai pra pagina principal mesmo.
-        this.router.navigateByUrl(returnUrl);
-      },
-      error: (err) => {
-        console.error('Erro ao fazer login', err);
-        this.errorMessage = 'Email ou senha inválidos.';
-      }
-    });
-  }     
+  async onLogin() {
+    try {
+      await this.authService.login(this.email, this.password);
+      const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+      // se tiver uma returnUrl(checar auth guard), redirecionara pra la ao logar,
+      // se nao, vai pra pagina principal mesmo.
+      this.router.navigateByUrl(returnUrl);
+    } catch (err: any) {
+      console.error('Erro ao fazer login', err);
+      this.errorMessage = 'Email ou senha inválidos.';
+    }
+  }
 
   navigateToRegister(): void {
     this.router.navigate(['/register']);

@@ -10,11 +10,12 @@ import { Product } from '../../models/product.model';
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css'],
+  standalone: true,
   imports: [CommonModule]
 })
 export class StoreComponent implements OnInit {
   products: Product[] = [];
-  userId: number | null = null;
+  userId: string | null = null;
 
   constructor(
     private productService: ProductService,
@@ -22,15 +23,18 @@ export class StoreComponent implements OnInit {
     private authService: AuthService,
   ) {}
 
-  ngOnInit() {
-    this.productService.getProducts().subscribe((data) => {
+  async ngOnInit() {
+    try {
+      const data = await this.productService.getProducts();
       this.products = data.map(product => ({ ...product, added: false }));
-    });
+    } catch (err: any) {
+      console.error('Erro ao buscar produtos', err);
+    }
 
     this.userId = this.authService.getUserId();
   }
 
-  addToCart(product: any) {
+  async addToCart(product: Product) {
     if (!this.userId) {
       alert('Você precisa estar logado para adicionar ao pedido.');
       return;
@@ -42,13 +46,11 @@ export class StoreComponent implements OnInit {
       product.added = false;
     }, 2000);
 
-    this.orderService.addProductToOrder(this.userId, product).subscribe({
-      next: (order) => {
-        console.log('Produto adicionado ao pedido:', order);
-      },
-      error: (err) => {
-        console.error('Erro ao adicionar ao pedido', err);
-      }
-    });
+    try {
+      const order = await this.orderService.addProductToOrder(product);
+      console.log('Produto adicionado ao pedido:', order);
+    } catch (err: any) {
+      console.error('Erro ao adicionar ao pedido', err);
+    }
   }
 }

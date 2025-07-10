@@ -1,131 +1,120 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
-import { switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { environment } from '../../environments/environment';
+import { SupabaseService } from './supabase.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = `${environment.apiUrl}orders`;
-
   constructor(
-    private http: HttpClient,
+    private supabaseService: SupabaseService,
     private authService: AuthService
-  ) {}
+  ) { }
 
-  createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(this.apiUrl, order);
+  async createOrder(order: Partial<Order>): Promise<Order | null> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('orders')
+      .insert([order])
+      .select();
+
+    if (error) {
+      console.error('Erro ao criar pedido:', error);
+      return null;
+    }
+    return data ? data[0] : null;
   }
 
-  getOrdersFromAuthenticatedUser(): Observable<Order[]> {
+  async getOrdersFromAuthenticatedUser(): Promise<Order[]> {
     const userId = this.authService.getUserId();
-    return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`);
+    if (!userId) {
+        return []; // Retorna vazio se não houver usuário logado
+    }
+
+    const { data, error } = await this.supabaseService.supabase
+      .from('orders')
+      .select('*')
+      .eq('userId', userId); // Filtra os pedidos pelo ID do usuário
+
+    if (error) {
+      console.error('Erro ao buscar pedidos do usuário:', error);
+      return [];
+    }
+    return data as Order[];
   }
 
-  getOrderById(id: number): Observable<Order> {
-    return this.http.get<Order>(`${this.apiUrl}/${id}`);
+  async getOrderById(id: number): Promise<Order | null> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('orders')
+      .select('*')
+      .eq('id', id)
+      .single(); // .single() retorna um único objeto em vez de um array
+
+    if (error) {
+      console.error('Erro ao buscar pedido por ID:', error);
+      return null;
+    }
+    return data as Order;
   }
 
-  updateOrder(order: Order): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrl}/${order.id}`, order);
+  async updateOrder(order: Order): Promise<Order | null> {
+    const { data, error } = await this.supabaseService.supabase
+      .from('orders')
+      .update(order)
+      .eq('id', order.id)
+      .select();
+
+    if (error) {
+      console.error('Erro ao atualizar pedido:', error);
+      return null;
+    }
+    return data ? data[0] : null;
   }
 
-  deleteOrder(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  async deleteOrder(id: number): Promise<boolean> {
+    const { error } = await this.supabaseService.supabase
+      .from('orders')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Erro ao deletar pedido:', error);
+      return false;
+    }
+    return true;
   }
 
-  addProductToOrder(userId: number, product: Product): Observable<Order> {
-    return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`).pipe(
-      switchMap((orders) => {
-        let order = orders.find((order) => order.status === 'Aguardando confirmação');
-        if (!order) {
-          order = {
-            userId,
-            status: 'Aguardando confirmação',
-            products: [product],
-            total: product.price,
-            createdAt: new Date().toISOString(),
-          } as Order;
-          return this.createOrder(order);
-        } else {
-          order.products.push(product);
-          order.total += product.price;
-          return this.updateOrder(order);
-        }
-      })
-    );
+  // Lógica de "adicionar produto ao carrinho/pedido" refatorada
+  async addProductToOrder(product: Product): Promise<Order | null> {
+    const userId = this.authService.getUserId();
+    if (!userId) throw new Error('Usuário não autenticado.');
+
+    // 1. Procura por um pedido "em aberto"
+    const { data: existingOrders, error } = await this.supabaseService.supabase
+      .from('orders')
+      .select('*')
+      .eq('userId', userId)
+      .eq('status', 'Aguardando confirmação');
+
+    if (error) throw new Error('Erro ao buscar pedidos existentes.');
+
+    let order = existingOrders?.[0];
+
+    // 2. Se não existir um pedido aberto, cria um novo
+    if (!order) {
+      return this.createOrder({
+        userId, // O ID do usuário já é pego aqui
+        status: 'Aguardando confirmação',
+        products: [product],
+        total: product.price,
+        // O `createdAt` será preenchido pelo default `now()` na tabela.
+      });
+    } else {
+    // 3. Se já existe, adiciona o produto e atualiza
+      order.products.push(product);
+      order.total += product.price;
+      return this.updateOrder(order);
+    }
   }
 }
-
-
-
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { Order } from '../models/order.model';
-// import { Product } from '../models/product.model';
-// import { switchMap } from 'rxjs/operators';
-// import { AuthService } from './auth.service';
-
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class OrderService {
-//   private apiUrl = 'http://localhost:3000/orders';
-
-//   constructor(
-//     private http: HttpClient,
-//     private authService: AuthService
-//   ) {}
-
-//   createOrder(order: Order): Observable<Order> {
-//     return this.http.post<Order>(this.apiUrl, order);
-//   }
-
-//   getOrdersFromAuthenticatedUser(): Observable<Order[]> {
-//     const userId = this.authService.getUserId();
-//     return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`);
-//   }
-
-//   getOrderById(id: number): Observable<Order> {
-//     return this.http.get<Order>(`${this.apiUrl}/${id}`);
-//   }
-
-//   updateOrder(order: Order): Observable<Order> {
-//     return this.http.put<Order>(`${this.apiUrl}/${order.id}`, order);
-//   }
-
-//   deleteOrder(id: number): Observable<void> {
-//     return this.http.delete<void>(`${this.apiUrl}/${id}`);
-//   }
-
-
-//   addProductToOrder(userId: number, product: Product): Observable<Order> {
-//     return this.http.get<Order[]>(`${this.apiUrl}?userId=${userId}`).pipe(
-//       switchMap((orders) => {
-//         let order = orders.find((order) => order.status === 'Aguardando confirmação');
-//         if (!order) {
-
-//           order = {
-//             userId,
-//             status: 'Aguardando confirmação',
-//             products: [product],
-//             total: product.price,
-//             createdAt: new Date().toISOString(),
-//           } as Order;
-//           return this.createOrder(order);
-//         } else {
-
-//           order.products.push(product);
-//           order.total += product.price;
-//           return this.updateOrder(order);
-//         }
-//       })
-//     );
-//   }
-// }

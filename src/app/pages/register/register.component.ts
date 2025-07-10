@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user: User = {
+  user = {
     name: '',
     email: '',
     password: '',
@@ -25,7 +24,7 @@ export class RegisterComponent {
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  onRegister(): void {
+  async onRegister(): Promise<void> {
     this.errorMessage = '';
     this.successMessage = '';
 
@@ -57,33 +56,26 @@ export class RegisterComponent {
       return;
     }
 
-    this.authService.checkEmailExists(email).subscribe({
-      next: (exists) => {
-        if (exists) {
-          this.errorMessage = 'O email já existe no banco de dados.';
-          return;
-        }
+    try {
       // sempre precisamos usar o subscribe pra de fato pegar o VALOR de um observable. se tentamos usar q nem fazemos em apis back-end,
       // exemplo: if checkEmailExists, isso n daria certo pq a gente pega o observable e nao o valor dele
       // nesse caso nao é apenas um boolean, é um Observable<boolean>, entao pra termos acesso ao boolean q ta "dentro" do observable precisamos
       // do subscribe.
+      // A lógica acima foi substituída. Agora, tentamos registrar diretamente.
+      // Se o email já existir, o Supabase retornará um erro que será capturado pelo bloco catch.
 
-        this.authService.register(name, email, password).subscribe({
-          next: () => {
-            this.successMessage = 'Cadastro realizado com sucesso! Redirecionando pra página de login...';
-            setTimeout(() => this.router.navigate(['/login']), 3000);
-          },
-          error: (err) => {
-            console.error('Erro ao registrar:', err);
-            this.errorMessage = 'Erro ao registrar. Tente novamente.';
-          }
-        });
-      },
-      error: (err) => {
-        console.error('Erro ao verificar email:', err);
-        this.errorMessage = 'Erro ao verificar email. Tente novamente.';
+      await this.authService.register(name, email, password);
+      this.successMessage = 'Cadastro realizado com sucesso! Verifique seu e-mail para confirmar a conta. Redirecionando...';
+      setTimeout(() => this.router.navigate(['/login']), 4000);
+
+    } catch (err: any) {
+      console.error('Erro ao registrar:', err);
+      if (err.message && err.message.includes('User already registered')) {
+        this.errorMessage = 'Este e-mail já está cadastrado.';
+      } else {
+        this.errorMessage = 'Erro ao registrar. Tente novamente.';
       }
-    });
+    }
   }
 
   navigateToLogin(): void {
