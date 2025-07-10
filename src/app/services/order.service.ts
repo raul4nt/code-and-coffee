@@ -29,13 +29,13 @@ export class OrderService {
   async getOrdersFromAuthenticatedUser(): Promise<Order[]> {
     const userId = this.authService.getUserId();
     if (!userId) {
-        return []; // Retorna vazio se não houver usuário logado
+        return [];
     }
 
     const { data, error } = await this.supabaseService.supabase
       .from('orders')
       .select('*')
-      .eq('userId', userId); // Filtra os pedidos pelo ID do usuário
+      .eq('userId', userId);
 
     if (error) {
       console.error('Erro ao buscar pedidos do usuário:', error);
@@ -49,7 +49,7 @@ export class OrderService {
       .from('orders')
       .select('*')
       .eq('id', id)
-      .single(); // .single() retorna um único objeto em vez de um array
+      .single();
 
     if (error) {
       console.error('Erro ao buscar pedido por ID:', error);
@@ -85,12 +85,10 @@ export class OrderService {
     return true;
   }
 
-  // Lógica de "adicionar produto ao carrinho/pedido" refatorada
   async addProductToOrder(product: Product): Promise<Order | null> {
     const userId = this.authService.getUserId();
     if (!userId) throw new Error('Usuário não autenticado.');
 
-    // 1. Procura por um pedido "em aberto"
     const { data: existingOrders, error } = await this.supabaseService.supabase
       .from('orders')
       .select('*')
@@ -101,17 +99,14 @@ export class OrderService {
 
     let order = existingOrders?.[0];
 
-    // 2. Se não existir um pedido aberto, cria um novo
     if (!order) {
       return this.createOrder({
-        userId, // O ID do usuário já é pego aqui
+        userId,
         status: 'Aguardando confirmação',
         products: [product],
         total: product.price,
-        // O `createdAt` será preenchido pelo default `now()` na tabela.
       });
     } else {
-    // 3. Se já existe, adiciona o produto e atualiza
       order.products.push(product);
       order.total += product.price;
       return this.updateOrder(order);

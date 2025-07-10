@@ -14,7 +14,6 @@ export class AuthService {
     private supabaseService: SupabaseService,
     private router: Router
   ) {
-    // Fica ouvindo o estado da autenticação em tempo real
     this.supabaseService.supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN') {
         this.currentUser = session!.user;
@@ -27,7 +26,6 @@ export class AuthService {
     });
   }
 
-  // Novo método para carregar a sessão inicial
   async loadSession() {
     const { data, error } = await this.supabaseService.supabase.auth.getSession();
     if (data.session) {
@@ -55,7 +53,6 @@ export class AuthService {
       email: email,
       password: password,
       options: {
-        // Você pode guardar dados extras do usuário aqui
         data: {
           name: name,
           role: 'customer'
@@ -66,9 +63,6 @@ export class AuthService {
     if (error) {
       throw new Error(error.message);
     }
-
-    // O ideal é criar uma tabela 'profiles' para guardar o nome e o 'role'
-    // mas o options.data já ajuda muito.
 
     return data;
   }

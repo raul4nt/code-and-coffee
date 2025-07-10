@@ -57,13 +57,6 @@ export class RegisterComponent {
     }
 
     try {
-      // sempre precisamos usar o subscribe pra de fato pegar o VALOR de um observable. se tentamos usar q nem fazemos em apis back-end,
-      // exemplo: if checkEmailExists, isso n daria certo pq a gente pega o observable e nao o valor dele
-      // nesse caso nao é apenas um boolean, é um Observable<boolean>, entao pra termos acesso ao boolean q ta "dentro" do observable precisamos
-      // do subscribe.
-      // A lógica acima foi substituída. Agora, tentamos registrar diretamente.
-      // Se o email já existir, o Supabase retornará um erro que será capturado pelo bloco catch.
-
       await this.authService.register(name, email, password);
       this.successMessage = 'Cadastro realizado com sucesso! Verifique seu e-mail para confirmar a conta. Redirecionando...';
       setTimeout(() => this.router.navigate(['/login']), 4000);

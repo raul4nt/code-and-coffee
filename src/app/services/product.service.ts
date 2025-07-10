@@ -18,7 +18,6 @@ export class ProductService {
       return [];
     }
 
-    // O Supabase já retorna os dados no formato correto, assumindo que seu model Product bate com a tabela.
     return data as Product[];
   }
 
@@ -26,7 +25,7 @@ export class ProductService {
     const { data, error } = await this.supabaseService.supabase
       .from('products')
       .insert([product])
-      .select(); // .select() faz com que o registro inserido seja retornado
+      .select(); 
 
     if (error) {
       console.error('Erro ao adicionar produto:', error);
